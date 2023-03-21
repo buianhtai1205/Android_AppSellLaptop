@@ -16,12 +16,51 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolBarMain"
-                app:title="Trang chủ"
-                android:background="#ff00ffff"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
+                android:layout_height="?attr/actionBarSize"
+                android:background="#ffd400">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/shop_logo"
+                        android:translationX="-15dp"
+                        android:scaleType="centerCrop" />
+                    <EditText
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/brand_background"
+                        android:drawableStart="@drawable/search"
+                        android:drawablePadding="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:ems="10"
+                        android:hint="Find laptop ..."
+                        android:inputType="textPersonName"
+                        android:paddingStart="20dp"
+                        android:textSize="14sp"
+                        android:textStyle="italic"
+                        android:autofillHints="" />
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#ff5e00"
+                        android:elevation="3dp"
+                        android:src="@drawable/shopping_cart"
+                        app:maxImageSize="25dp"
+                        android:translationX="20dp"
+                        android:contentDescription="TODO">
+
+                    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+                </LinearLayout>
+
             </androidx.appcompat.widget.Toolbar>
 
             <ViewFlipper
