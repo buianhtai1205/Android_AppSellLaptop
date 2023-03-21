@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayoutMain;
     Toolbar toolBarMain;
     ViewFlipper viewFlipperMain;
-    RecyclerView recyclerViewMain;
+    RecyclerView recyclerViewBrand, recyclerViewProduct;
     NavigationView navigationViewMain;
     ListView listViewMain;
     BrandAdapter brandAdapter;
@@ -75,8 +77,11 @@ public class MainActivity extends AppCompatActivity {
                     brandModel -> {
                         if (brandModel.isSuccess()) {
                             arrayBrand = brandModel.getResult();
-                            brandAdapter = new BrandAdapter(arrayBrand, getApplicationContext());
-                            listViewMain.setAdapter(brandAdapter);
+                            brandAdapter = new BrandAdapter(arrayBrand);
+
+                            LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+                            recyclerViewBrand.setLayoutManager(linearLayoutManager);
+                            recyclerViewBrand.setAdapter(brandAdapter);
                         }
                     }
                 ));
@@ -124,7 +129,8 @@ public class MainActivity extends AppCompatActivity {
         drawerLayoutMain = findViewById(R.id.drawerLayoutMain);
         toolBarMain = findViewById(R.id.toolBarMain);
         viewFlipperMain = findViewById(R.id.viewFlipperMain);
-        recyclerViewMain = findViewById(R.id.recyclerViewMain);
+        recyclerViewBrand = findViewById(R.id.recyclerViewBrand);
+        recyclerViewProduct = findViewById(R.id.recyclerViewProduct);
         navigationViewMain = findViewById(R.id.navigationViewMain);
         listViewMain = findViewById(R.id.listViewMain);
 

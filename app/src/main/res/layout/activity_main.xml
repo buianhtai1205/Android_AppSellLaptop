@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f1f1f1"
     tools:context=".activity.MainActivity">
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -17,7 +18,7 @@
             android:layout_height="match_parent">
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolBarMain"
-                app:title="Trang chính"
+                app:title="Trang chủ"
                 android:background="#ff00ffff"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize">
@@ -26,29 +27,29 @@
             <ViewFlipper
                 android:id="@+id/viewFlipperMain"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="150dp">
 
             </ViewFlipper>
 
             <LinearLayout
                 android:orientation="vertical"
-                android:background="#5992d2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <TextView
-                    android:text="Sản phẩm mới nhất"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/holo_red_light"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="20sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewMain"
+                    android:id="@+id/recyclerViewBrand"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/card_brands_background"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
+                    android:layout_height="70dp" >
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
                 </androidx.recyclerview.widget.RecyclerView>
 
