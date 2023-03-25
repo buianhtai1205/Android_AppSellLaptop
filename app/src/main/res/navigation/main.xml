@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    app:startDestination="@id/menuHome">
+
+    <fragment
+        android:id="@+id/menuHome"
+        android:name="com.appbanlaptop.fragment.HomeFragment"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/menuProfile"
+        android:name="com.appbanlaptop.fragment.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/menuCart"
+        android:name="com.appbanlaptop.fragment.CartFragment"
+        android:label="Cart"
+        tools:layout="@layout/fragment_cart" />
+
+    <fragment
+        android:id="@+id/menuNotify"
+        android:name="com.appbanlaptop.fragment.NotificationFragment"
+        android:label="Notification"
+        tools:layout="@layout/fragment_notification" />
+
+    <fragment
+        android:id="@+id/menuMessage"
+        android:name="com.appbanlaptop.fragment.MessageFragment"
+        android:label="Message"
+        tools:layout="@layout/fragment_message" />
+
+    <fragment
+        android:id="@+id/menuOrderHistory"
+        android:name="com.appbanlaptop.fragment.OrderHistoryFragment"
+        android:label="Order History"
+        tools:layout="@layout/fragment_order_history" />
+
+    <fragment
+        android:id="@+id/menuSetting"
+        android:name="com.appbanlaptop.fragment.SettingFragment"
+        android:label="Setting"
+        tools:layout="@layout/fragment_setting" />
+
+</navigation>
