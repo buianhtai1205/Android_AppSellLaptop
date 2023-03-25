@@ -7,7 +7,7 @@ import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.GET;
 
 public interface ApiShopLapTop {
-    @GET("get_brands.php")
+    @GET("brand/get_brands.php")
     Observable<BrandModel> getBrands();
 
 }

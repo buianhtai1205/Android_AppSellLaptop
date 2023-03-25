@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/menuHome"
+        android:icon="@drawable/home_icon"
+        android:title="Trang chủ" />
+
+    <item android:id="@+id/menuProfile"
+        android:icon="@drawable/profile_icon"
+        android:title="Trang cá nhân" />
+
+    <item android:id="@+id/menuCart"
+        android:icon="@drawable/cart_icon"
+        android:title="Giỏ hàng" />
+
+    <item android:id="@+id/menuNotify"
+        android:icon="@drawable/notify_icon"
+        android:title="Thông báo" />
+
+    <item android:id="@+id/menuMessage"
+        android:icon="@drawable/message_icon"
+        android:title="Tin nhắn" />
+
+    <item android:id="@+id/menuOrderHistory"
+        android:icon="@drawable/order_history_icon"
+        android:title="Lịch sử mua hàng" />
+
+    <item android:id="@+id/menuSetting"
+        android:icon="@drawable/setting_icon"
+        android:title="Cài đặt" />
+
+    <item android:id="@+id/menuLogin"
+        android:icon="@drawable/login_icon"
+        android:title="Đăng nhập" />
+
+    <item android:id="@+id/menuLogout"
+        android:icon="@drawable/logout_icon"
+        android:title="Đăng xuất" />
+
+    <item android:id="@+id/menuRegister"
+        android:icon="@drawable/register_icon"
+        android:title="Đăng ký" />
+
+</menu>

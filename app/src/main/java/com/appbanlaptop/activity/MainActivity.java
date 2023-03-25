@@ -34,16 +34,17 @@ import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
-
     DrawerLayout drawerLayoutMain;
-    Toolbar toolBarMain;
+
+    ImageView imageMenu;
     ViewFlipper viewFlipperMain;
     RecyclerView recyclerViewBrand, recyclerViewProduct;
     NavigationView navigationViewMain;
-    ListView listViewMain;
     BrandAdapter brandAdapter;
     List<Brand> arrayBrand;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        RxJavaPlugins.setErrorHandler(Timber::e);
+
         apiShopLapTop = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiShopLapTop.class);
 
         AnhXa();
@@ -114,25 +117,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void ActionBar() {
-        setSupportActionBar(toolBarMain);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolBarMain.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size);
-        toolBarMain.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawerLayoutMain.openDrawer(GravityCompat.START);
-            }
+        imageMenu.setOnClickListener(view -> {
+            drawerLayoutMain.openDrawer(GravityCompat.START);
         });
+        navigationViewMain.setItemIconTintList(null);
     }
 
     private void AnhXa() {
         drawerLayoutMain = findViewById(R.id.drawerLayoutMain);
-        toolBarMain = findViewById(R.id.toolBarMain);
+        imageMenu = findViewById(R.id.imageMenu);
         viewFlipperMain = findViewById(R.id.viewFlipperMain);
         recyclerViewBrand = findViewById(R.id.recyclerViewBrand);
         recyclerViewProduct = findViewById(R.id.recyclerViewProduct);
         navigationViewMain = findViewById(R.id.navigationViewMain);
-        listViewMain = findViewById(R.id.listViewMain);
 
         // khoi tao list
         arrayBrand = new ArrayList<>();
