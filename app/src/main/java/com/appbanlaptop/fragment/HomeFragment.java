@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,7 +21,9 @@ import android.widget.ViewFlipper;
 
 import com.appbanlaptop.R;
 import com.appbanlaptop.adapter.BrandAdapter;
+import com.appbanlaptop.adapter.LaptopAdapter;
 import com.appbanlaptop.model.Brand;
+import com.appbanlaptop.model.Laptop;
 import com.appbanlaptop.retrofit.ApiShopLapTop;
 import com.appbanlaptop.retrofit.RetrofitClient;
 import com.appbanlaptop.utils.Utils;
@@ -54,9 +57,13 @@ public class HomeFragment extends Fragment {
     //myStartCode
     View layoutView;
     ViewFlipper viewFlipperMain;
-    RecyclerView recyclerViewBrand, recyclerViewProduct;
+    RecyclerView recyclerViewBrand, recyclerViewGamingProduct, recyclerViewMacbookProduct, recyclerViewStudyProduct;
+    RecyclerView recyclerViewTechnologyProduct, recyclerViewThinProduct, recyclerViewDiamondProduct;
     BrandAdapter brandAdapter;
+    LaptopAdapter laptopAdapter;
     List<Brand> arrayBrand;
+    List<Laptop> arrayLaptopGaming, arrayLaptopMacbook, arrayLaptopStudy;
+    List<Laptop> arrayLaptopTechnology, arrayLaptopThin, arrayLaptopDiamond;
     ApiShopLapTop apiShopLapTop;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -106,6 +113,12 @@ public class HomeFragment extends Fragment {
 //            Toast.makeText(getContext(), "Connect successful!", Toast.LENGTH_LONG).show();
             ActionViewFlipper();
             getListBrands();
+            getListLaptopGaming();
+            getListLaptopMacbook();
+            getListLaptopStudy();
+            getListLaptopTechnology();
+            getListLaptopThin();
+            getListLaptopDiamond();
 
         } else {
             Toast.makeText(getContext(), "Connect fail!", Toast.LENGTH_LONG).show();
@@ -113,6 +126,114 @@ public class HomeFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return layoutView;
+    }
+
+    private void getListLaptopGaming() {
+        compositeDisposable.add(apiShopLapTop.getLaptopGamings()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        laptopModel -> {
+                            if (laptopModel.isSuccess()) {
+                                arrayLaptopGaming = laptopModel.getResult();
+                                laptopAdapter = new LaptopAdapter(arrayLaptopGaming);
+
+                                RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+                                recyclerViewGamingProduct.setLayoutManager(layoutManager);
+                                recyclerViewGamingProduct.setAdapter(laptopAdapter);
+                            }
+                        }
+                ));
+    }
+
+    private void getListLaptopMacbook() {
+        compositeDisposable.add(apiShopLapTop.getLaptopMacbooks()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        laptopModel -> {
+                            if (laptopModel.isSuccess()) {
+                                arrayLaptopMacbook = laptopModel.getResult();
+                                laptopAdapter = new LaptopAdapter(arrayLaptopMacbook);
+
+                                RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+                                recyclerViewMacbookProduct.setLayoutManager(layoutManager);
+                                recyclerViewMacbookProduct.setAdapter(laptopAdapter);
+                            }
+                        }
+                ));
+    }
+
+    private void getListLaptopStudy() {
+        compositeDisposable.add(apiShopLapTop.getLaptopStudys()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        laptopModel -> {
+                            if (laptopModel.isSuccess()) {
+                                arrayLaptopStudy = laptopModel.getResult();
+                                laptopAdapter = new LaptopAdapter(arrayLaptopStudy);
+
+                                RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+                                recyclerViewStudyProduct.setLayoutManager(layoutManager);
+                                recyclerViewStudyProduct.setAdapter(laptopAdapter);
+                            }
+                        }
+                ));
+    }
+
+    private void getListLaptopTechnology() {
+        compositeDisposable.add(apiShopLapTop.getLaptopTechnologys()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        laptopModel -> {
+                            if (laptopModel.isSuccess()) {
+                                arrayLaptopTechnology = laptopModel.getResult();
+                                laptopAdapter = new LaptopAdapter(arrayLaptopTechnology);
+
+                                RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+                                recyclerViewTechnologyProduct.setLayoutManager(layoutManager);
+                                recyclerViewTechnologyProduct.setAdapter(laptopAdapter);
+                            }
+                        }
+                ));
+    }
+
+    private void getListLaptopThin() {
+        compositeDisposable.add(apiShopLapTop.getLaptopThins()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        laptopModel -> {
+                            if (laptopModel.isSuccess()) {
+                                arrayLaptopThin = laptopModel.getResult();
+                                laptopAdapter = new LaptopAdapter(arrayLaptopThin);
+
+                                RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+                                recyclerViewThinProduct.setLayoutManager(layoutManager);
+                                recyclerViewThinProduct.setAdapter(laptopAdapter);
+                            }
+                        }
+                ));
+    }
+
+    private void getListLaptopDiamond() {
+        compositeDisposable.add(apiShopLapTop.getLaptopDiamonds()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        laptopModel -> {
+                            if (laptopModel.isSuccess()) {
+                                arrayLaptopDiamond = laptopModel.getResult();
+                                laptopAdapter = new LaptopAdapter(arrayLaptopDiamond);
+
+                                RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+                                recyclerViewDiamondProduct.setLayoutManager(layoutManager);
+                                recyclerViewDiamondProduct.setAdapter(laptopAdapter);
+                            }
+                        }
+                ));
     }
 
     private void getListBrands() {
@@ -147,10 +268,21 @@ public class HomeFragment extends Fragment {
         //AnhXa
         viewFlipperMain = (ViewFlipper)layoutView.findViewById(R.id.viewFlipperMain);
         recyclerViewBrand = layoutView.findViewById(R.id.recyclerViewBrand);
-        recyclerViewProduct = layoutView.findViewById(R.id.recyclerViewProduct);
+        recyclerViewGamingProduct = layoutView.findViewById(R.id.recyclerViewGamingProduct);
+        recyclerViewMacbookProduct = layoutView.findViewById(R.id.recyclerViewMacbookProduct);
+        recyclerViewStudyProduct = layoutView.findViewById(R.id.recyclerViewStudyProduct);
+        recyclerViewTechnologyProduct = layoutView.findViewById(R.id.recyclerViewTechnologyProduct);
+        recyclerViewThinProduct = layoutView.findViewById(R.id.recyclerViewThinProduct);
+        recyclerViewDiamondProduct = layoutView.findViewById(R.id.recyclerViewDiamondProduct);
 
         // khoi tao list
         arrayBrand = new ArrayList<>();
+        arrayLaptopGaming = new ArrayList<>();
+        arrayLaptopMacbook = new ArrayList<>();
+        arrayLaptopStudy = new ArrayList<>();
+        arrayLaptopTechnology = new ArrayList<>();
+        arrayLaptopThin = new ArrayList<>();
+        arrayLaptopDiamond = new ArrayList<>();
     }
 
     private void ActionViewFlipper() {

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#fff"
+    android:layout_marginTop="5dp"
+    android:paddingTop="10dp"
+    android:layout_width="200dp"
+    android:layout_height="500dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:text="Trả góp 0%"
+            android:textAlignment="center"
+            android:layout_marginLeft="10dp"
+            android:textColor="#000"
+            android:background="#f1f1f1"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/imageLaptop"
+            android:layout_margin="5dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_media_24"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:contentDescription="TODO" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="25dp"
+            android:src="@drawable/icon_sale" />
+
+        <TextView
+            android:id="@+id/tvLaptopName"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:textColor="#000"
+            android:text="Lenovo Ideapad 3 15IAU7 i3 1215U (82RK005LVN)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/tvLaptopRam"
+                android:layout_marginLeft="5dp"
+                android:text="RAM 8GB"
+                android:textSize="10sp"
+                android:textColor="#000"
+                android:background="@drawable/border_background"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tvLaptopRom"
+                android:layout_marginLeft="5dp"
+                android:text="SSD 256GB"
+                android:textSize="10sp"
+                android:textColor="#000"
+                android:background="@drawable/border_background"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:textAlignment="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:text="Online giá rẻ"
+            android:textSize="10sp"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/tvLaptopPrice"
+                android:layout_marginLeft="5dp"
+                android:text="13.890.000đ"
+                android:textSize="10sp"
+                android:textColor="#000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvLaptopDescPercent"
+                android:layout_marginLeft="10dp"
+                android:text="-20%"
+                android:textSize="10sp"
+                android:textColor="#000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvLaptopSalePrice"
+            android:layout_marginLeft="5dp"
+            android:text="10.990.000đ"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvLaptopScreen"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:text="Màn hình: 15.6', FullHD"
+            android:textSize="12sp"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvLaptopCpu"
+            android:layout_marginLeft="5dp"
+            android:text="CPU: i3, 1215U, 1.2GHz"
+            android:textSize="12sp"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvLaptopCard"
+            android:layout_marginLeft="5dp"
+            android:text="Card: Intel UHD"
+            android:textSize="12sp"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvLaptopPin"
+            android:layout_marginLeft="5dp"
+            android:text="Pin: 45Wh"
+            android:textSize="12sp"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvLaptopWeight"
+            android:layout_marginLeft="5dp"
+            android:text="Khối lượng: 1.63kg"
+            android:textSize="12sp"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnShowDetailLaptop"
+            android:layout_marginLeft="5dp"
+            android:text="Xem chi tiết"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

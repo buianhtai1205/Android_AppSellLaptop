@@ -29,7 +29,7 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.ViewHolder> 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            image_url =itemView.findViewById(R.id.item_brand_image);
+            image_url = itemView.findViewById(R.id.item_brand_image);
         }
     }
 

@@ -5,44 +5,330 @@
     android:layout_height="match_parent"
     tools:context=".fragment.HomeFragment">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-        <ViewFlipper
-            android:id="@+id/viewFlipperMain"
-            android:layout_width="match_parent"
-            android:layout_height="150dp">
-
-        </ViewFlipper>
-
+        android:layout_height="wrap_content">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewBrand"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/card_brands_background"
+            android:layout_height="match_parent" >
+            <ViewFlipper
+                android:id="@+id/viewFlipperMain"
                 android:layout_width="match_parent"
-                android:layout_height="70dp" >
+                android:layout_height="150dp">
 
-            </androidx.recyclerview.widget.RecyclerView>
+            </ViewFlipper>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="100dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewProduct"
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewBrand"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/card_brands_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp" >
 
-            </androidx.recyclerview.widget.RecyclerView>
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:padding="5dp"
+                            android:background="@drawable/type_background"
+                            android:src="@drawable/hot_sale" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Deal Sốc"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:padding="5dp"
+                            android:background="@drawable/type_background"
+                            android:src="@drawable/gaming" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Gaming"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:padding="5dp"
+                            android:background="@drawable/type_background"
+                            android:src="@drawable/apple" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="MacBook"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:padding="5dp"
+                            android:background="@drawable/type_background"
+                            android:src="@drawable/study_office" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Học tập"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:padding="5dp"
+                            android:background="@drawable/type_background"
+                            android:src="@drawable/technology" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kỹ thuật"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:padding="5dp"
+                            android:background="@drawable/type_background"
+                            android:src="@drawable/thin" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mỏng, nhẹ"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:padding="5dp"
+                            android:background="@drawable/type_background"
+                            android:src="@drawable/diamond" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cao cấp"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:src="@drawable/type_gaming"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewGamingProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="1010dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <Button
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Xem tất cả"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#ffd400"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:src="@drawable/type_macbook"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewMacbookProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="1010dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <Button
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Xem tất cả"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#ffd400"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:src="@drawable/type_study"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewStudyProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="1010dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <Button
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Xem tất cả"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#ffd400"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:src="@drawable/type_technology"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewTechnologyProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="1010dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <Button
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Xem tất cả"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#ffd400"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:src="@drawable/type_thin"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewThinProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="1010dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <Button
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Xem tất cả"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#ffd400"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:src="@drawable/type_diamond"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewDiamondProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="1010dp">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <Button
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Xem tất cả"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#ffd400"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
         </LinearLayout>
-    </LinearLayout>
-
-
+    </ScrollView>
 
 </FrameLayout>
