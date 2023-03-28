@@ -328,6 +328,36 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/footer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="#f1f1f1"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="2023. Công ty cổ phần Shop Laptop chính hãng. GPDKKD: 99999999 do sở KH ĐT TP.HCM cấp ngày 29/03/2023. GPMXH: 238/GP-BTTTT do Bộ Thông Tin và Truyền Thông cấp ngày 29/03/2023."
+                    android:textColor="#000000"
+                    android:textSize="10sp"
+                    tools:ignore="SmallSp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="Nội dung layout tham khảo trang web thegioididong.com do nhóm 25 thực hiện. Ứng dụng chỉ mang tính chất đồ án môn học, không phục vụ các lĩnh vực buôn bán hay marketing khác."
+                    android:textColor="#000000"
+                    android:textSize="10sp"
+                    tools:ignore="SmallSp" />
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

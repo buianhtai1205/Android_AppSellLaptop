@@ -24,6 +24,7 @@ import com.appbanlaptop.adapter.BrandAdapter;
 import com.appbanlaptop.adapter.LaptopAdapter;
 import com.appbanlaptop.model.Brand;
 import com.appbanlaptop.model.Laptop;
+import com.appbanlaptop.model.LaptopModel;
 import com.appbanlaptop.retrofit.ApiShopLapTop;
 import com.appbanlaptop.retrofit.RetrofitClient;
 import com.appbanlaptop.utils.Utils;
@@ -36,6 +37,9 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import timber.log.Timber;
 
 /**
@@ -113,12 +117,12 @@ public class HomeFragment extends Fragment {
 //            Toast.makeText(getContext(), "Connect successful!", Toast.LENGTH_LONG).show();
             ActionViewFlipper();
             getListBrands();
-            getListLaptopGaming();
-            getListLaptopMacbook();
-            getListLaptopStudy();
-            getListLaptopTechnology();
-            getListLaptopThin();
-            getListLaptopDiamond();
+            getListLaptops("gaming");
+            getListLaptops("macbook");
+            getListLaptops("study");
+            getListLaptops("technology");
+            getListLaptops("thin");
+            getListLaptops("diamond");
 
         } else {
             Toast.makeText(getContext(), "Connect fail!", Toast.LENGTH_LONG).show();
@@ -128,112 +132,73 @@ public class HomeFragment extends Fragment {
         return layoutView;
     }
 
-    private void getListLaptopGaming() {
-        compositeDisposable.add(apiShopLapTop.getLaptopGamings()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        laptopModel -> {
-                            if (laptopModel.isSuccess()) {
-                                arrayLaptopGaming = laptopModel.getResult();
-                                laptopAdapter = new LaptopAdapter(arrayLaptopGaming);
-
-                                RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-                                recyclerViewGamingProduct.setLayoutManager(layoutManager);
-                                recyclerViewGamingProduct.setAdapter(laptopAdapter);
-                            }
-                        }
-                ));
+    private void getListLaptops(String type) {
+        Call<LaptopModel> call = apiShopLapTop.getLaptops(type);
+        call.enqueue(new Callback<LaptopModel>() {
+            @Override
+            public void onResponse(Call<LaptopModel> call, Response<LaptopModel> response) {
+                LaptopModel laptopModel = response.body();
+                if (laptopModel.isSuccess()) {
+                    setAdapterForRecyclerViewProduct(laptopModel, type);
+                }
+            }
+            @Override
+            public void onFailure(Call<LaptopModel> call, Throwable t) {
+                call.cancel();
+            }
+        });
     }
 
-    private void getListLaptopMacbook() {
-        compositeDisposable.add(apiShopLapTop.getLaptopMacbooks()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        laptopModel -> {
-                            if (laptopModel.isSuccess()) {
-                                arrayLaptopMacbook = laptopModel.getResult();
-                                laptopAdapter = new LaptopAdapter(arrayLaptopMacbook);
-
-                                RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-                                recyclerViewMacbookProduct.setLayoutManager(layoutManager);
-                                recyclerViewMacbookProduct.setAdapter(laptopAdapter);
-                            }
-                        }
-                ));
-    }
-
-    private void getListLaptopStudy() {
-        compositeDisposable.add(apiShopLapTop.getLaptopStudys()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        laptopModel -> {
-                            if (laptopModel.isSuccess()) {
-                                arrayLaptopStudy = laptopModel.getResult();
-                                laptopAdapter = new LaptopAdapter(arrayLaptopStudy);
-
-                                RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-                                recyclerViewStudyProduct.setLayoutManager(layoutManager);
-                                recyclerViewStudyProduct.setAdapter(laptopAdapter);
-                            }
-                        }
-                ));
-    }
-
-    private void getListLaptopTechnology() {
-        compositeDisposable.add(apiShopLapTop.getLaptopTechnologys()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        laptopModel -> {
-                            if (laptopModel.isSuccess()) {
-                                arrayLaptopTechnology = laptopModel.getResult();
-                                laptopAdapter = new LaptopAdapter(arrayLaptopTechnology);
-
-                                RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-                                recyclerViewTechnologyProduct.setLayoutManager(layoutManager);
-                                recyclerViewTechnologyProduct.setAdapter(laptopAdapter);
-                            }
-                        }
-                ));
-    }
-
-    private void getListLaptopThin() {
-        compositeDisposable.add(apiShopLapTop.getLaptopThins()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        laptopModel -> {
-                            if (laptopModel.isSuccess()) {
-                                arrayLaptopThin = laptopModel.getResult();
-                                laptopAdapter = new LaptopAdapter(arrayLaptopThin);
-
-                                RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-                                recyclerViewThinProduct.setLayoutManager(layoutManager);
-                                recyclerViewThinProduct.setAdapter(laptopAdapter);
-                            }
-                        }
-                ));
-    }
-
-    private void getListLaptopDiamond() {
-        compositeDisposable.add(apiShopLapTop.getLaptopDiamonds()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        laptopModel -> {
-                            if (laptopModel.isSuccess()) {
-                                arrayLaptopDiamond = laptopModel.getResult();
-                                laptopAdapter = new LaptopAdapter(arrayLaptopDiamond);
-
-                                RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-                                recyclerViewDiamondProduct.setLayoutManager(layoutManager);
-                                recyclerViewDiamondProduct.setAdapter(laptopAdapter);
-                            }
-                        }
-                ));
+    private void setAdapterForRecyclerViewProduct(LaptopModel laptopModel, String type) {
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+        switch (type) {
+            case "gaming": {
+                arrayLaptopGaming = laptopModel.getResult();
+                laptopAdapter = new LaptopAdapter(arrayLaptopGaming);
+                recyclerViewGamingProduct.setLayoutManager(layoutManager);
+                recyclerViewGamingProduct.setAdapter(laptopAdapter);
+                break;
+            }
+            case "macbook": {
+                arrayLaptopMacbook = laptopModel.getResult();
+                laptopAdapter = new LaptopAdapter(arrayLaptopMacbook);
+                recyclerViewMacbookProduct.setLayoutManager(layoutManager);
+                recyclerViewMacbookProduct.setAdapter(laptopAdapter);
+                break;
+            }
+            case "study": {
+                arrayLaptopStudy = laptopModel.getResult();
+                laptopAdapter = new LaptopAdapter(arrayLaptopStudy);
+                recyclerViewStudyProduct.setLayoutManager(layoutManager);
+                recyclerViewStudyProduct.setAdapter(laptopAdapter);
+                break;
+            }
+            case "technology": {
+                arrayLaptopTechnology = laptopModel.getResult();
+                laptopAdapter = new LaptopAdapter(arrayLaptopTechnology);
+                recyclerViewTechnologyProduct.setLayoutManager(layoutManager);
+                recyclerViewTechnologyProduct.setAdapter(laptopAdapter);
+                break;
+            }
+            case "thin": {
+                arrayLaptopThin = laptopModel.getResult();
+                laptopAdapter = new LaptopAdapter(arrayLaptopThin);
+                recyclerViewThinProduct.setLayoutManager(layoutManager);
+                recyclerViewThinProduct.setAdapter(laptopAdapter);
+                break;
+            }
+            case "diamond": {
+                arrayLaptopDiamond = laptopModel.getResult();
+                laptopAdapter = new LaptopAdapter(arrayLaptopDiamond);
+                recyclerViewDiamondProduct.setLayoutManager(layoutManager);
+                recyclerViewDiamondProduct.setAdapter(laptopAdapter);
+                break;
+            }
+            default: {
+                Toast.makeText(getContext(), "Has Error in setAdaterForRecyclerView", Toast.LENGTH_LONG).show();
+                break;
+            }
+        }
     }
 
     private void getListBrands() {

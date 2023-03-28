@@ -5,28 +5,17 @@ import com.appbanlaptop.model.BrandModel;
 import com.appbanlaptop.model.LaptopModel;
 
 import io.reactivex.rxjava3.core.Observable;
+import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Part;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiShopLapTop {
 
     @GET("brand/get_brands.php")
     Observable<BrandModel> getBrands();
 
-    @GET("laptop/get_laptops.php?type=gaming")
-    Observable<LaptopModel> getLaptopGamings();
-
-    @GET("laptop/get_laptops.php?type=macbook")
-    Observable<LaptopModel> getLaptopMacbooks();
-
-    @GET("laptop/get_laptops.php?type=study")
-    Observable<LaptopModel> getLaptopStudys();
-
-    @GET("laptop/get_laptops.php?type=technology")
-    Observable<LaptopModel> getLaptopTechnologys();
-
-    @GET("laptop/get_laptops.php?type=thin")
-    Observable<LaptopModel> getLaptopThins();
-
-    @GET("laptop/get_laptops.php?type=diamond")
-    Observable<LaptopModel> getLaptopDiamonds();
+    @GET("laptop/get_laptops.php?")
+    Call<LaptopModel> getLaptops(@Query("type") String type);
 }
