@@ -18,4 +18,7 @@ public interface ApiShopLapTop {
 
     @GET("laptop/get_laptops.php?")
     Call<LaptopModel> getLaptops(@Query("type") String type);
+
+    @GET("laptop/get_laptop_detail.php?")
+    Call<LaptopModel> getLaptopDetail(@Query("id") String id);
 }

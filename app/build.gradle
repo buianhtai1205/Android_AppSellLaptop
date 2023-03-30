@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -68,4 +69,6 @@ dependencies {
 
         // Jetpack Compose Integration
     implementation "androidx.navigation:navigation-compose:$nav_version"
+
+    implementation 'org.commonmark:commonmark:0.20.0'
 }

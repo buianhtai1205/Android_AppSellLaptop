@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.LaptopDetailFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="ScrollViewCount">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvLaptopBrandName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#00f"
+                android:layout_marginTop="5dp"
+                android:text="Laptop / Laptop Macbook" />
+
+            <ImageView
+                android:id="@+id/imageLaptop"
+                android:layout_margin="5dp"
+                android:padding="10dp"
+                android:src="@drawable/ic_media_24"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:contentDescription="TODO" />
+
+            <ImageView
+                android:layout_marginLeft="5dp"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icon_sale" />
+
+            <TextView
+                android:id="@+id/tvLaptopName"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="#000"
+                android:text="Lenovo Ideapad 3 15IAU7 i3 1215U (82RK005LVN)"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                <ImageView
+                    android:src="@drawable/star"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+                <ImageView
+                    android:src="@drawable/star"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+                <ImageView
+                    android:src="@drawable/star"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+                <ImageView
+                    android:src="@drawable/star"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+                <ImageView
+                    android:src="@drawable/rating"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+                <TextView
+
+                    android:text="125"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <TextView
+                android:text="Giá tại Hồ Chí Minh"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:textColor="#000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvLaptopPrice"
+                    android:text="22.990.000đ"
+                    android:textSize="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:text="Trả góp 0%"
+                    android:textAlignment="center"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="#000"
+                    android:background="#f1f1f1"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:background="@drawable/gradient_background"
+                android:layout_width="match_parent"
+                android:layout_height="70dp" >
+
+                <TextView
+                    android:id="@+id/tvLaptopSalePrice"
+                    android:layout_marginTop="16dp"
+                    android:text="18.990.000đ"
+                    android:textSize="24sp"
+                    android:layout_marginLeft="5dp"
+                    android:textStyle="bold"
+                    android:textColor="#fff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_marginLeft="140dp"
+                    android:layout_marginTop="5dp"
+                    android:text="Kết thúc vào 23:00 | 31/05"
+                    android:textSize="16sp"
+                    android:textColor="#fff"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <TextView
+                android:text="Cấu hình sản phẩm"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TableLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+                <TableRow android:background="#f5f5f5">
+                    <TextView
+                        android:layout_column="1"
+                        android:text="CPU:"
+                        android:textColor="#000"
+                        android:layout_width="150dp"
+                        android:padding="3dp" />
+                    <TextView
+                        android:id="@+id/tvLaptopCpu"
+                        android:text="Apple M1"
+                        android:gravity="left"
+                        android:textColor="#000"
+                        android:layout_width="250dp"
+                        android:padding="3dp" />
+                </TableRow>
+                <TableRow android:background="#fff">
+                    <TextView
+                        android:layout_column="1"
+                        android:text="RAM:"
+                        android:textColor="#000"
+                        android:layout_width="150dp"
+                        android:padding="3dp" />
+                    <TextView
+                        android:id="@+id/tvLaptopRam"
+                        android:text="8GB"
+                        android:gravity="left"
+                        android:textColor="#000"
+                        android:layout_width="250dp"
+                        android:padding="3dp" />
+                </TableRow>
+                <TableRow android:background="#f5f5f5">
+                    <TextView
+                        android:layout_column="1"
+                        android:text="Ổ cứng:"
+                        android:textColor="#000"
+                        android:layout_width="150dp"
+                        android:padding="3dp" />
+                    <TextView
+                        android:id="@+id/tvLaptopRom"
+                        android:text="256 GB SSD"
+                        android:gravity="left"
+                        android:textColor="#000"
+                        android:layout_width="250dp"
+                        android:padding="3dp" />
+                </TableRow>
+                <TableRow android:background="#fff">
+                    <TextView
+                        android:layout_column="1"
+                        android:text="Màn hình:"
+                        android:textColor="#000"
+                        android:layout_width="150dp"
+                        android:padding="3dp" />
+                    <TextView
+                        android:id="@+id/tvLaptopScreen"
+                        android:text="13.3', Retina (2500 x 1600)"
+                        android:gravity="left"
+                        android:textColor="#000"
+                        android:layout_width="250dp"
+                        android:padding="3dp" />
+                </TableRow>
+                <TableRow android:background="#f5f5f5">
+                    <TextView
+                        android:layout_column="1"
+                        android:text="Card màn hình:"
+                        android:textColor="#000"
+                        android:layout_width="150dp"
+                        android:padding="3dp" />
+                    <TextView
+                        android:id="@+id/tvLaptopCard"
+                        android:text="Card tích hợp, 7 nhân CPU"
+                        android:gravity="left"
+                        android:textColor="#000"
+                        android:layout_width="250dp"
+                        android:padding="3dp" />
+                </TableRow>
+                <TableRow android:background="#fff">
+                    <TextView
+                        android:layout_column="1"
+                        android:text="Cổng kết nối: "
+                        android:textColor="#000"
+                        android:layout_width="150dp"
+                        android:padding="3dp" />
+                    <TextView
+                        android:id="@+id/tvLaptopConnector"
+                        android:text="HDMI, LAN (RJ45), USB Type-C, Jack tai nghe 3.5 mm, 3 x USB 3.2"
+                        android:gravity="left"
+                        android:textColor="#000"
+                        android:layout_width="250dp"
+                        android:padding="3dp" />
+                </TableRow>
+                <TableRow android:background="#f5f5f5">
+                    <TextView
+                        android:layout_column="1"
+                        android:text="Đặc biệt:"
+                        android:textColor="#000"
+                        android:layout_width="150dp"
+                        android:padding="3dp" />
+                    <TextView
+                        android:id="@+id/tvLaptopSpecial"
+                        android:text="Có đèn bàn phím"
+                        android:gravity="left"
+                        android:textColor="#000"
+                        android:layout_width="250dp"
+                        android:padding="3dp" />
+                </TableRow>
+                <TableRow android:background="#fff">
+                    <TextView
+                        android:layout_column="1"
+                        android:text="Hệ điều hành:"
+                        android:textColor="#000"
+                        android:layout_width="150dp"
+                        android:padding="3dp" />
+                    <TextView
+                        android:id="@+id/tvLaptopOs"
+                        android:text="Windows 11 Home SL + Office Home, Student vĩnh viễn"
+                        android:gravity="left"
+                        android:textColor="#000"
+                        android:layout_width="250dp"
+                        android:padding="3dp" />
+                </TableRow>
+                <TableRow android:background="#f5f5f5">
+                    <TextView
+                        android:layout_column="1"
+                        android:text="Khối lượng:"
+                        android:textColor="#000"
+                        android:layout_width="150dp"
+                        android:padding="3dp" />
+                    <TextView
+                        android:id="@+id/tvLaptopWeight"
+                        android:text="1.2kg"
+                        android:gravity="left"
+                        android:textColor="#000"
+                        android:layout_width="250dp"
+                        android:padding="3dp" />
+                </TableRow>
+                <TableRow android:background="#fff">
+                    <TextView
+                        android:layout_column="1"
+                        android:text="Pin:"
+                        android:textColor="#000"
+                        android:layout_width="150dp"
+                        android:padding="3dp" />
+                    <TextView
+                        android:id="@+id/tvLaptopPin"
+                        android:text="45Wh"
+                        android:gravity="left"
+                        android:textColor="#000"
+                        android:layout_width="250dp"
+                        android:padding="3dp" />
+                </TableRow>
+                <TableRow android:background="#f5f5f5">
+                    <TextView
+                        android:layout_column="1"
+                        android:text="Thời điểm ra mắt:"
+                        android:textColor="#000"
+                        android:layout_width="150dp"
+                        android:padding="3dp" />
+                    <TextView
+                        android:id="@+id/tvLaptopYearLaunch"
+                        android:text="2021"
+                        android:gravity="left"
+                        android:textColor="#000"
+                        android:layout_width="250dp"
+                        android:padding="3dp" />
+                </TableRow>
+            </TableLayout>
+
+            <TextView
+                android:text="Thông tin sản phẩm"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="5dp"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <WebView
+                android:id="@+id/webView"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:textSize="10dp"
+                android:textColor="#000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="WebViewLayout" />
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/footer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="#f1f1f1"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="2023. Công ty cổ phần Shop Laptop chính hãng. GPDKKD: 99999999 do sở KH ĐT TP.HCM cấp ngày 29/03/2023. GPMXH: 238/GP-BTTTT do Bộ Thông Tin và Truyền Thông cấp ngày 29/03/2023."
+                    android:textColor="#000000"
+                    android:textSize="10sp"
+                    tools:ignore="SmallSp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="Nội dung layout tham khảo trang web thegioididong.com do nhóm 25 thực hiện. Ứng dụng chỉ mang tính chất đồ án môn học, không phục vụ các lĩnh vực buôn bán hay marketing khác."
+                    android:textColor="#000000"
+                    android:textSize="10sp"
+                    tools:ignore="SmallSp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>
