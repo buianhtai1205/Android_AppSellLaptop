@@ -379,6 +379,8 @@
     </ScrollView>
     
     <com.google.android.material.bottomappbar.BottomAppBar
+        style="@style/Widget.MaterialComponents.BottomAppBar"
+        android:theme="@style/AppThemeMaterial"
         android:layout_width="match_parent"
         android:layout_gravity="bottom"
         android:backgroundTint="#f1f1f1"
@@ -386,13 +388,13 @@
         tools:ignore="BottomAppBar">
         <Button
             android:text="Mua ngay"
-            android:backgroundTint="#33ac41"
+            android:background="#33ac41"
             android:layout_width="180dp"
             android:layout_height="wrap_content"/>
         <Button
             android:id="@+id/btnAddToCart"
             android:text="Thêm vào giỏ"
-            android:backgroundTint="#2f80ed"
+            android:background="#2f80ed"
             android:layout_marginLeft="30dp"
             android:layout_width="180dp"
             android:layout_height="wrap_content"/>
