@@ -12,10 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -50,13 +53,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         AnhXa();
         ActionBar();
 
     }
-
 
     private void ActionBar() {
         imageMenu.setOnClickListener(view -> {
@@ -72,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
         drawerLayoutMain = findViewById(R.id.drawerLayoutMain);
         imageMenu = findViewById(R.id.imageMenu);
         navigationViewMain = findViewById(R.id.navigationViewMain);
-
     }
-
 
 }

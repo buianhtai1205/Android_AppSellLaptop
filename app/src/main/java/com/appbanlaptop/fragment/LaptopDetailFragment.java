@@ -1,6 +1,7 @@
 package com.appbanlaptop.fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,17 +26,17 @@ import com.appbanlaptop.retrofit.ApiShopLapTop;
 import com.appbanlaptop.retrofit.RetrofitClient;
 import com.appbanlaptop.utils.Utils;
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 
 
 import org.commonmark.node.Image;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.AttributeProvider;
-import org.commonmark.renderer.html.AttributeProviderContext;
-import org.commonmark.renderer.html.AttributeProviderFactory;
 import org.commonmark.renderer.html.HtmlRenderer;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.Map;
 
 import io.reactivex.rxjava3.plugins.RxJavaPlugins;
@@ -81,6 +83,9 @@ public class LaptopDetailFragment extends Fragment {
     TextView tvLaptopSpecial, tvLaptopOs, tvLaptopWeight, tvLaptopPin, tvLaptopYearLaunch;
     ImageView imageLaptop;
     WebView webView;
+    Button btnAddToCart;
+    Integer laptopId;
+    String laptopImageUrl;
 
     public static LaptopDetailFragment newInstance(String param1, String param2) {
         LaptopDetailFragment fragment = new LaptopDetailFragment();
@@ -117,12 +122,38 @@ public class LaptopDetailFragment extends Fragment {
 
         if (isConnected(getContext())) {
             getLaptopDetail(id);
+
+            // handle add laptop to cart
+            btnAddToCart.setOnClickListener(view -> {
+                addLaptopToCart();
+            });
+
         } else {
             Toast.makeText(getContext(), "Connect fail!", Toast.LENGTH_LONG).show();
         }
 
 
         return layoutView;
+    }
+
+    private void addLaptopToCart() {
+//        HashMap<Integer, HashMap<String, String>> cart = new HashMap<>();
+//
+//        HashMap<String, String> laptop = new HashMap<>();
+//        laptop.put("name", tvLaptopName.getText().toString());
+//        laptop.put("quantity", String.valueOf(1));
+//        laptop.put("price", tvLaptopSalePrice.getText().toString());
+//        laptop.put("image_url", laptopImageUrl);
+//
+//        cart.put(laptopId, laptop);
+//
+//        SharedPreferences sharedPreferences = getContext().getSharedPreferences("cart", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//
+//        Gson gson = new Gson();
+//        String json = gson.toJson(cart);
+//        editor.putString("cart", json);
+//        editor.apply();
     }
 
     private void getLaptopDetail(String id) {
@@ -144,6 +175,10 @@ public class LaptopDetailFragment extends Fragment {
 
     private void setDataResponseToView(LaptopModel laptopModel) {
         Laptop laptop = laptopModel.getResult().get(0);
+
+        laptopId = laptop.getId();
+        laptopImageUrl = laptop.getImage_url();
+
         tvLaptopBrandName.setText("Laptop / Laptop " + laptop.getBrand().getName());
         Glide.with(layoutView.getContext()).load(laptop.getImage_url()).into(imageLaptop);
         tvLaptopName.setText(laptop.getName());
@@ -212,5 +247,7 @@ public class LaptopDetailFragment extends Fragment {
         imageLaptop = layoutView.findViewById(R.id.imageLaptop);
 
         webView = layoutView.findViewById(R.id.webView);
+
+        btnAddToCart = layoutView.findViewById(R.id.btnAddToCart);
     }
 }

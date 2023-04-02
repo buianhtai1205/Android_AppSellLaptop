@@ -70,5 +70,12 @@ dependencies {
         // Jetpack Compose Integration
     implementation "androidx.navigation:navigation-compose:$nav_version"
 
+        // markdown handle lib
     implementation 'org.commonmark:commonmark:0.20.0'
+
+        // json handle lib
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+        //splash-screen
+    implementation "androidx.core:core-splashscreen:1.0.0"
 }
