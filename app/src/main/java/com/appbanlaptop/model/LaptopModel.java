@@ -4,7 +4,7 @@ import java.util.List;
 
 public class LaptopModel {
     private boolean success;
-    private String messenge;
+    private String message;
     private List<Laptop> result;
 
     public boolean isSuccess() {
@@ -15,12 +15,12 @@ public class LaptopModel {
         this.success = success;
     }
 
-    public String getMessenge() {
-        return messenge;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMessenge(String messenge) {
-        this.messenge = messenge;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public List<Laptop> getResult() {

@@ -50,6 +50,7 @@
                     android:layout_height="wrap_content" />
 
                 <EditText
+                    android:id="@+id/etUsername"
                     android:background="@drawable/editext_background"
                     android:layout_marginTop="8dp"
                     android:ems="10"
@@ -77,6 +78,7 @@
                     android:layout_height="wrap_content" />
 
                 <EditText
+                    android:id="@+id/etPassword"
                     android:background="@drawable/editext_background"
                     android:layout_marginTop="8dp"
                     android:ems="10"
@@ -123,16 +125,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <ImageView
+                    android:id="@+id/btnGoogle"
                     android:layout_weight="1"
                     android:src="@drawable/google"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <ImageView
+                    android:id="@+id/btnTwitter"
                     android:layout_weight="1"
                     android:src="@drawable/twitter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <ImageView
+                    android:id="@+id/btnFacebook"
                     android:layout_weight="1"
                     android:src="@drawable/facebook"
                     android:layout_width="wrap_content"
@@ -149,6 +154,7 @@
                 android:layout_height="wrap_content" />
 
             <Button
+                android:id="@+id/btnLogin"
                 android:text="Đăng nhập"
                 android:layout_marginTop="30dp"
                 android:gravity="center"

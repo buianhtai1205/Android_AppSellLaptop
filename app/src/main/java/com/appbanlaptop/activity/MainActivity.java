@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -34,6 +36,13 @@ import android.widget.ViewFlipper;
 
 import com.appbanlaptop.R;
 import com.appbanlaptop.adapter.BrandAdapter;
+import com.appbanlaptop.fragment.CartFragment;
+import com.appbanlaptop.fragment.HomeFragment;
+import com.appbanlaptop.fragment.MessageFragment;
+import com.appbanlaptop.fragment.NotificationFragment;
+import com.appbanlaptop.fragment.OrderHistoryFragment;
+import com.appbanlaptop.fragment.ProfileFragment;
+import com.appbanlaptop.fragment.SettingFragment;
 import com.appbanlaptop.model.Brand;
 import com.appbanlaptop.retrofit.ApiShopLapTop;
 import com.appbanlaptop.retrofit.RetrofitClient;
@@ -92,23 +101,78 @@ public class MainActivity extends AppCompatActivity {
 
     private void MenuHandleWithLogin() {
         setItemInMenuWithLogin();
+
+        Menu menu = navigationViewMain.getMenu();
+        final MenuItem[] previousMenuItem = {menu.findItem(R.id.menuHome)}; //tùy theo MenuItem đầu tiên sẽ khác nhau
+        previousMenuItem[0].setChecked(true); //set trạng thái checked cho MenuItem đầu tiên
+
         navigationViewMain.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                Log.d("MainActivity", "onNavigationItemSelected() called");
-                if (item.getItemId() == R.id.menuLogin) {
-//                    Log.d("MainActivity", "Launching login activity");
-                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                    startActivityForResult(intent, 1);
-                    return true;
+                Fragment selectedFragment = null;
+                switch (item.getItemId()) {
+                    case R.id.menuLogin: {
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivityForResult(intent, 1);
+                        break;
+                    }
+                    case R.id.menuRegister: {
+                        Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                        startActivityForResult(intent, 2);
+                        break;
+                    }
+                    case R.id.menuHome: {
+                        selectedFragment = new HomeFragment();
+                        break;
+                    }
+
+                    case R.id.menuProfile: {
+                        selectedFragment = new ProfileFragment();
+                        break;
+                    }
+
+                    case R.id.menuCart: {
+                        selectedFragment = new CartFragment();
+                        break;
+                    }
+
+                    case R.id.menuNotify: {
+                        selectedFragment = new NotificationFragment();
+                        break;
+                    }
+
+                    case R.id.menuMessage: {
+                        selectedFragment = new MessageFragment();
+                        break;
+                    }
+
+                    case R.id.menuOrderHistory: {
+                        selectedFragment = new OrderHistoryFragment();
+                        break;
+                    }
+
+                    case R.id.menuSetting: {
+                        selectedFragment = new SettingFragment();
+                        break;
+                    }
+
+                    default:
+                        break;
                 }
-                if (item.getItemId() == R.id.menuRegister) {
-//                    Log.d("MainActivity", "Launching signup activity");
-                    Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
-                    startActivityForResult(intent, 2);
-                    return true;
+                // Highlight the selected item in the menu
+                previousMenuItem[0].setChecked(false); //bỏ trạng thái check của MenuItem trước đó
+                item.setChecked(true);
+                previousMenuItem[0] = item; //cập nhật MenuItem trước đó
+
+                // Replace the fragment
+                if (selectedFragment != null) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, selectedFragment).commit();
                 }
-                return false;
+
+                // Close the navigation drawer
+                drawerLayoutMain.closeDrawer(GravityCompat.START);
+
+                return true;
             }
         });
     }
