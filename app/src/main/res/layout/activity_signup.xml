@@ -55,6 +55,7 @@
                         android:layout_height="wrap_content" />
 
                     <EditText
+                        android:id="@+id/etUsername"
                         android:background="@drawable/editext_background"
                         android:layout_marginTop="8dp"
                         android:ems="10"
@@ -83,6 +84,7 @@
                         android:layout_height="wrap_content" />
 
                     <EditText
+                        android:id="@+id/etPassword"
                         android:background="@drawable/editext_background"
                         android:layout_marginTop="8dp"
                         android:ems="10"
@@ -111,6 +113,7 @@
                     android:layout_height="wrap_content" />
 
                 <EditText
+                    android:id="@+id/etFullname"
                     android:background="@drawable/editext_background"
                     android:layout_marginTop="8dp"
                     android:ems="10"
@@ -138,6 +141,7 @@
                     android:layout_height="wrap_content" />
 
                 <EditText
+                    android:id="@+id/etEmail"
                     android:background="@drawable/editext_background"
                     android:layout_marginTop="8dp"
                     android:ems="10"
@@ -165,6 +169,7 @@
                     android:layout_height="wrap_content" />
 
                 <EditText
+                    android:id="@+id/etPhoneNumber"
                     android:background="@drawable/editext_background"
                     android:layout_marginTop="8dp"
                     android:ems="10"
@@ -192,6 +197,7 @@
                     android:layout_height="wrap_content" />
 
                 <EditText
+                    android:id="@+id/etAddress"
                     android:background="@drawable/editext_background"
                     android:layout_marginTop="8dp"
                     android:ems="10"
@@ -205,6 +211,7 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/btnSignup"
                 android:text="Đăng ký"
                 android:layout_marginTop="15dp"
                 android:gravity="center"

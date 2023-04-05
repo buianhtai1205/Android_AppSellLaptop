@@ -65,9 +65,11 @@ public class LoginActivity extends AppCompatActivity {
                         if (userModel.isSuccess()) {
                             Toast.makeText(LoginActivity.this, "Đăng nhập thành công.", Toast.LENGTH_LONG).show();
                             // set value to local
+                            int id = userModel.getResult().get(0).getId();
 
                             // finish
                             Intent resultIntent = new Intent();
+                            resultIntent.putExtra("id", id);
                             setResult(RESULT_OK, resultIntent);
                             finish();
                         } else {

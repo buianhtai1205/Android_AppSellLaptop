@@ -5,6 +5,11 @@
     android:id="@+id/main"
     app:startDestination="@id/menuHome">
 
+<!--    <activity android:id="@+id/LoginActivity"-->
+<!--        android:name="com.appbanlaptop.activity.LoginActivity" />-->
+<!--    <activity android:id="@+id/SignUpActivity"-->
+<!--        android:name="com.appbanlaptop.activity.SignUpActivity" />-->
+
     <fragment
         android:id="@+id/menuHome"
         android:name="com.appbanlaptop.fragment.HomeFragment"

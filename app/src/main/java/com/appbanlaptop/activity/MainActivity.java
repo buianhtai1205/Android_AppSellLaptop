@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -64,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageMenu;
     NavigationView navigationViewMain;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,23 +80,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 1) {
-            // Check if the login activity was successful
-            if (resultCode == RESULT_OK) {
-                // The login was successful, do something here (e.g. update UI, show a message)
-            } else {
-                // The login was not successful, do something here (e.g. show an error message)
-            }
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            // login success handle
+            SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("user_id", data.getIntExtra("id", 0));
+            editor.apply();
         }
 
-        if (requestCode == 2) {
-            // Check if the sign up activity was successful
-            if (resultCode == RESULT_OK) {
-                // The sign up was successful, do something here (e.g. update UI, show a message)
-            } else {
-                // The sign up was not successful, do something here (e.g. show an error message)
-            }
+        if (requestCode == 2 && resultCode == RESULT_OK) {
+            // signup success handle, duplicate code of Login. The end project will merge if it don't have difference
+            SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("user_id", data.getIntExtra("id", 0));
+            editor.apply();
         }
+        setItemInMenuWithLogin();
     }
 
     private void MenuHandleWithLogin() {
@@ -110,17 +109,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment selectedFragment = null;
+                Intent intent = null;
                 switch (item.getItemId()) {
                     case R.id.menuLogin: {
-                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        intent = new Intent(MainActivity.this, LoginActivity.class);
                         startActivityForResult(intent, 1);
                         break;
                     }
                     case R.id.menuRegister: {
-                        Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                        intent = new Intent(MainActivity.this, SignUpActivity.class);
                         startActivityForResult(intent, 2);
                         break;
                     }
+
+                    case R.id.menuLogout: {
+                        SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.remove("user_id");
+                        editor.apply();
+                        setItemInMenuWithLogin();
+                        break;
+                    }
+
                     case R.id.menuHome: {
                         selectedFragment = new HomeFragment();
                         break;
@@ -159,12 +169,15 @@ public class MainActivity extends AppCompatActivity {
                     default:
                         break;
                 }
-                // Highlight the selected item in the menu
-                previousMenuItem[0].setChecked(false); //bỏ trạng thái check của MenuItem trước đó
-                item.setChecked(true);
-                previousMenuItem[0] = item; //cập nhật MenuItem trước đó
 
-                // Replace the fragment
+                // Highlight the selected item in the menu
+                if(item.getItemId() != R.id.menuLogin && item.getItemId() != R.id.menuRegister) {
+                    previousMenuItem[0].setChecked(false); //bỏ trạng thái check của MenuItem trước đó
+                    item.setChecked(true);
+                    previousMenuItem[0] = item; //cập nhật MenuItem trước đó
+                }
+
+                // Replace the fragment or start the activity
                 if (selectedFragment != null) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, selectedFragment).commit();
                 }
@@ -179,9 +192,39 @@ public class MainActivity extends AppCompatActivity {
 
     private void setItemInMenuWithLogin() {
         Menu menu = navigationViewMain.getMenu();
-        MenuItem itemToHide = menu.findItem(R.id.menuLogout);
-        itemToHide.setVisible(false);
-        invalidateOptionsMenu();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+        int user_id = sharedPreferences.getInt("user_id", 0);
+        if (user_id == 0) {
+            // isLogin == false
+
+            Log.d("isLogin=False", "call()");
+
+            MenuItem itemLogin = menu.findItem(R.id.menuLogin);
+            MenuItem itemRegister = menu.findItem(R.id.menuRegister);
+            MenuItem itemLogout = menu.findItem(R.id.menuLogout);
+
+            Log.d("itemLogin", String.valueOf(itemLogin));
+            Log.d("itemRegister", String.valueOf(itemRegister));
+
+            itemLogin.setVisible(true);
+            itemRegister.setVisible(true);
+            itemLogout.setVisible(false);
+
+            invalidateOptionsMenu();
+        } else {
+            // isLogin == true
+
+            Log.d("isLogin=True", "call()");
+
+            MenuItem itemLogin = menu.findItem(R.id.menuLogin);
+            MenuItem itemRegister = menu.findItem(R.id.menuRegister);
+            itemLogin.setVisible(false);
+            itemRegister.setVisible(false);
+            MenuItem itemLogout = menu.findItem(R.id.menuLogout);
+            itemLogout.setVisible(true);
+            invalidateOptionsMenu();
+        }
     }
 
     private void ActionBar() {
@@ -189,8 +232,9 @@ public class MainActivity extends AppCompatActivity {
             drawerLayoutMain.openDrawer(GravityCompat.START);
         });
         navigationViewMain.setItemIconTintList(null);
-        final NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-        final NavController navController = navHostFragment.getNavController();
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        NavController navController = navHostFragment.getNavController();
+
         NavigationUI.setupWithNavController(navigationViewMain, navController);
     }
 
