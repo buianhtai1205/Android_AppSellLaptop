@@ -76,5 +76,10 @@
         android:name="com.appbanlaptop.fragment.LogoutFragment"
         android:label="fragment_logout"
         tools:layout="@layout/fragment_logout" />
+    <fragment
+        android:id="@+id/menuAdmin"
+        android:name="com.appbanlaptop.fragment.admin.AdminFragment"
+        android:label="fragment_admin"
+        tools:layout="@layout/fragment_admin" />
 
 </navigation>

@@ -67,6 +67,10 @@ public class LoginActivity extends AppCompatActivity {
                             int id = userModel.getResult().get(0).getId();
                             Log.d("Login Activity: id", String.valueOf(id));
                             Utils.user_id = id;
+                            String role = userModel.getResult().get(0).getRole();
+                            if (role.equals("admin")) {
+                                Utils.isAdmin = true;
+                            }
 
                             // finish
                             Intent intent = new Intent();

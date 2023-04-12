@@ -41,4 +41,8 @@
         android:icon="@drawable/register_icon"
         android:title="Đăng ký" />
 
+    <item android:id="@+id/menuAdmin"
+        android:icon="@drawable/star"
+        android:title="Quản lý" />
+
 </menu>

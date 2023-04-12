@@ -26,6 +26,9 @@ public class LogoutActivity extends AppCompatActivity {
         editor.apply();
 
         Utils.user_id = 0;
+        if (Utils.isAdmin) {
+            Utils.isAdmin = false;
+        }
         // finish
         Intent intent = new Intent();
         setResult(Activity.RESULT_OK, intent);

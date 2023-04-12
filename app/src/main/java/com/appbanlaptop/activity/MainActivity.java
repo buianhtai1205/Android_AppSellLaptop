@@ -193,6 +193,10 @@ public class MainActivity extends AppCompatActivity {
         Log.d("MainActivity", "setItemInMenuWithLogin call()");
         Menu menu = navigationViewMain.getMenu();
 
+        // auto hide menu Admin
+        MenuItem itemAdmin = menu.findItem(R.id.menuAdmin);
+        itemAdmin.setVisible(false);
+
         SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
         int user_id = sharedPreferences.getInt("user_id", 0);
         if (user_id == 0) {
@@ -208,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
             itemRegister.setVisible(true);
             itemLogout.setVisible(false);
 
-            invalidateOptionsMenu();
+
         } else {
             // isLogin == true
 
@@ -220,8 +224,14 @@ public class MainActivity extends AppCompatActivity {
             itemRegister.setVisible(false);
             MenuItem itemLogout = menu.findItem(R.id.menuLogout);
             itemLogout.setVisible(true);
-            invalidateOptionsMenu();
+
+            //check admin user
+            if (Utils.isAdmin) {
+                itemAdmin.setVisible(true);
+            }
         }
+
+        invalidateOptionsMenu();
     }
 
     private void ActionBar() {
