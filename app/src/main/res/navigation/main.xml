@@ -5,11 +5,6 @@
     android:id="@+id/main"
     app:startDestination="@id/menuHome">
 
-<!--    <activity android:id="@+id/LoginActivity"-->
-<!--        android:name="com.appbanlaptop.activity.LoginActivity" />-->
-<!--    <activity android:id="@+id/SignUpActivity"-->
-<!--        android:name="com.appbanlaptop.activity.SignUpActivity" />-->
-
     <fragment
         android:id="@+id/menuHome"
         android:name="com.appbanlaptop.fragment.HomeFragment"
@@ -60,6 +55,26 @@
         android:id="@+id/laptopDetailFragment"
         android:name="com.appbanlaptop.fragment.LaptopDetailFragment"
         android:label="fragment_laptop_detail"
-        tools:layout="@layout/fragment_laptop_detail" />
+        tools:layout="@layout/fragment_laptop_detail" >
+        <action
+            android:id="@+id/action_laptopDetailFragment_to_menuHome"
+            app:destination="@id/menuHome" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/menuLogin"
+        android:name="com.appbanlaptop.fragment.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/menuRegister"
+        android:name="com.appbanlaptop.fragment.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" />
+    <fragment
+        android:id="@+id/menuLogout"
+        android:name="com.appbanlaptop.fragment.LogoutFragment"
+        android:label="fragment_logout"
+        tools:layout="@layout/fragment_logout" />
 
 </navigation>

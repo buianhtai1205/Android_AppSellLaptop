@@ -1,5 +1,6 @@
 package com.appbanlaptop.adapter;
 
+import android.app.Activity;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -79,7 +81,7 @@ public class LaptopAdapter extends RecyclerView.Adapter<LaptopAdapter.ViewHolder
         holder.btnShowDetailLaptop.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
             bundle.putString("id", String.valueOf(arrayLaptop.get(position).getId()));
-            Navigation.findNavController(view).navigate(R.id.laptopDetailFragment, bundle);
+            Navigation.findNavController(view).navigate(R.id.action_menuHome_to_laptopDetailFragment, bundle);
         });
     }
 

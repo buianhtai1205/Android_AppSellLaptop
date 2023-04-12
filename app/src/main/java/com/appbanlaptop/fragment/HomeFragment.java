@@ -6,6 +6,9 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -70,6 +73,7 @@ public class HomeFragment extends Fragment {
     List<Laptop> arrayLaptopTechnology, arrayLaptopThin, arrayLaptopDiamond;
     ApiShopLapTop apiShopLapTop;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
+    NavController navController;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -111,6 +115,8 @@ public class HomeFragment extends Fragment {
         apiShopLapTop = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiShopLapTop.class);
 
         AnhXa();
+
+//        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
 
         //Function
         if (isConnected(getContext())) {

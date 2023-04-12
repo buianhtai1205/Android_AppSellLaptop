@@ -1,5 +1,6 @@
 package com.appbanlaptop.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,8 +45,6 @@ public class LoginActivity extends AppCompatActivity {
 
         AnhXa();
         handleLogin();
-
-
     }
 
     private void handleLogin() {
@@ -66,11 +65,13 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "Đăng nhập thành công.", Toast.LENGTH_LONG).show();
                             // set value to local
                             int id = userModel.getResult().get(0).getId();
+                            Log.d("Login Activity: id", String.valueOf(id));
+                            Utils.user_id = id;
 
                             // finish
-                            Intent resultIntent = new Intent();
-                            resultIntent.putExtra("id", id);
-                            setResult(RESULT_OK, resultIntent);
+                            Intent intent = new Intent();
+//                            intent.putExtra("user_id", id);
+                            setResult(Activity.RESULT_OK, intent);
                             finish();
                         } else {
                             Toast.makeText(LoginActivity.this, "Tên đăng nhập hoặc mật khẫu không đúng.", Toast.LENGTH_LONG).show();

@@ -67,10 +67,10 @@ public class SignUpActivity extends AppCompatActivity  {
                             Toast.makeText(SignUpActivity.this, "Đăng ký thành công.", Toast.LENGTH_LONG).show();
                             // set value to local
                             int id = userModel.getResult().get(0).getId();
+                            Utils.user_id = id;
 
                             // finish
                             Intent resultIntent = new Intent();
-                            resultIntent.putExtra("id", id);
                             setResult(RESULT_OK, resultIntent);
                             finish();
                         } else {

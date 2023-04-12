@@ -27,6 +27,7 @@ import com.appbanlaptop.retrofit.RetrofitClient;
 import com.appbanlaptop.utils.Utils;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 
 import org.commonmark.node.Image;
@@ -35,6 +36,7 @@ import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.AttributeProvider;
 import org.commonmark.renderer.html.HtmlRenderer;
 
+import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -83,8 +85,8 @@ public class LaptopDetailFragment extends Fragment {
     TextView tvLaptopSpecial, tvLaptopOs, tvLaptopWeight, tvLaptopPin, tvLaptopYearLaunch;
     ImageView imageLaptop;
     WebView webView;
-    Button btnAddToCart;
-    Integer laptopId;
+    Button btnAddToCart, btnBuyNow;
+    Integer laptopId, quantityOld = 0;;
     String laptopImageUrl;
 
     public static LaptopDetailFragment newInstance(String param1, String param2) {
@@ -137,23 +139,52 @@ public class LaptopDetailFragment extends Fragment {
     }
 
     private void addLaptopToCart() {
-//        HashMap<Integer, HashMap<String, String>> cart = new HashMap<>();
-//
-//        HashMap<String, String> laptop = new HashMap<>();
-//        laptop.put("name", tvLaptopName.getText().toString());
-//        laptop.put("quantity", String.valueOf(1));
-//        laptop.put("price", tvLaptopSalePrice.getText().toString());
-//        laptop.put("image_url", laptopImageUrl);
-//
-//        cart.put(laptopId, laptop);
-//
-//        SharedPreferences sharedPreferences = getContext().getSharedPreferences("cart", Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sharedPreferences.edit();
-//
-//        Gson gson = new Gson();
-//        String json = gson.toJson(cart);
-//        editor.putString("cart", json);
-//        editor.apply();
+
+        boolean check = checkLaptopInCart(laptopId);
+
+        HashMap<Integer, HashMap<String, String>> cart = new HashMap<>();
+        HashMap<String, String> laptop = new HashMap<>();
+        laptop.put("name", tvLaptopName.getText().toString());
+        laptop.put("sale_price", tvLaptopSalePrice.getText().toString());
+        laptop.put("price", tvLaptopPrice.getText().toString());
+        laptop.put("image_url", laptopImageUrl);
+
+        if (check == false) {
+            // new laptop
+            laptop.put("quantity", String.valueOf(1));
+        } else {
+            // old laptop
+            int quantityNew = quantityOld + 1;
+            laptop.put("quantity", String.valueOf(quantityNew));
+        }
+
+        cart.put(laptopId, laptop);
+
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("CartPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(cart);
+        editor.putString("cart", json);
+        editor.apply();
+        Toast.makeText(getContext(), "Đã thêm sản phẩm vào giỏ hàng thành công!", Toast.LENGTH_LONG).show();
+    }
+
+    private boolean checkLaptopInCart(int laptopId) {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("CartPrefs", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("cart", "");
+        Type type = new TypeToken< HashMap<Integer, HashMap<String, String>> >() {}.getType();
+        HashMap<Integer, HashMap<String, String>> cart = gson.fromJson(json, type);
+
+        if (cart != null && cart.containsKey(laptopId)) {
+            // get quantity if has cart[laptopId]
+            HashMap<String, String> laptop = cart.get(laptopId);
+
+            String quantityString = laptop.get("quantity");
+            quantityOld = Integer.parseInt(quantityString);
+        }
+
+        return cart != null && cart.containsKey(laptopId);
     }
 
     private void getLaptopDetail(String id) {
@@ -249,5 +280,6 @@ public class LaptopDetailFragment extends Fragment {
         webView = layoutView.findViewById(R.id.webView);
 
         btnAddToCart = layoutView.findViewById(R.id.btnAddToCart);
+        btnBuyNow = layoutView.findViewById(R.id.btnBuyNow);
     }
 }

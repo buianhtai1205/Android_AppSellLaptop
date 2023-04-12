@@ -387,6 +387,7 @@
         android:layout_height="50dp"
         tools:ignore="BottomAppBar">
         <Button
+            android:id="@+id/btnBuyNow"
             android:text="Mua ngay"
             android:background="#33ac41"
             android:layout_width="180dp"
