@@ -1,5 +1,6 @@
 package com.appbanlaptop.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
@@ -140,51 +141,37 @@ public class LaptopDetailFragment extends Fragment {
 
     private void addLaptopToCart() {
 
-        boolean check = checkLaptopInCart(laptopId);
-
-        HashMap<Integer, HashMap<String, String>> cart = new HashMap<>();
-        HashMap<String, String> laptop = new HashMap<>();
-        laptop.put("name", tvLaptopName.getText().toString());
-        laptop.put("sale_price", tvLaptopSalePrice.getText().toString());
-        laptop.put("price", tvLaptopPrice.getText().toString());
-        laptop.put("image_url", laptopImageUrl);
-
-        if (check == false) {
-            // new laptop
-            laptop.put("quantity", String.valueOf(1));
-        } else {
-            // old laptop
-            int quantityNew = quantityOld + 1;
-            laptop.put("quantity", String.valueOf(quantityNew));
-        }
-
-        cart.put(laptopId, laptop);
-
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("CartPrefs", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(cart);
-        editor.putString("cart", json);
-        editor.apply();
-        Toast.makeText(getContext(), "Đã thêm sản phẩm vào giỏ hàng thành công!", Toast.LENGTH_LONG).show();
-    }
-
-    private boolean checkLaptopInCart(int laptopId) {
-        SharedPreferences sharedPreferences = getContext().getSharedPreferences("CartPrefs", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("CartPrefs", Activity.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = sharedPreferences.getString("cart", "");
         Type type = new TypeToken< HashMap<Integer, HashMap<String, String>> >() {}.getType();
         HashMap<Integer, HashMap<String, String>> cart = gson.fromJson(json, type);
 
-        if (cart != null && cart.containsKey(laptopId)) {
-            // get quantity if has cart[laptopId]
-            HashMap<String, String> laptop = cart.get(laptopId);
+        if (cart == null) {
+            cart = new HashMap<>();
+        }
+
+        HashMap<String, String> laptop = new HashMap<>();
+        if (cart.containsKey(laptopId)) {
+            laptop = cart.get(laptopId);
 
             String quantityString = laptop.get("quantity");
             quantityOld = Integer.parseInt(quantityString);
+            laptop.put("quantity", String.valueOf(quantityOld + 1));
+        } else {
+            laptop.put("name", tvLaptopName.getText().toString());
+            laptop.put("sale_price", tvLaptopSalePrice.getText().toString());
+            laptop.put("price", tvLaptopPrice.getText().toString());
+            laptop.put("image_url", laptopImageUrl);
+            laptop.put("quantity", String.valueOf(1));
         }
 
-        return cart != null && cart.containsKey(laptopId);
+        cart.put(laptopId, laptop);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        json = gson.toJson(cart);
+        editor.putString("cart", json);
+        editor.apply();
+        Toast.makeText(getContext(), "Đã thêm sản phẩm vào giỏ hàng thành công!", Toast.LENGTH_LONG).show();
     }
 
     private void getLaptopDetail(String id) {

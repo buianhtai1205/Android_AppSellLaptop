@@ -33,7 +33,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         ImageView laptopImage;
-        TextView laptopName, laptopSalePrice, laptopPrice, laptopQuantity, cartSum;
+        TextView laptopName, laptopSalePrice, laptopPrice, laptopQuantity, laptopSum;
         Button btnDelete, btnDecrease, btnIncrease;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -42,7 +42,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             laptopSalePrice = itemView.findViewById(R.id.laptopSalePrice);
             laptopPrice = itemView.findViewById(R.id.laptopPrice);
             laptopQuantity = itemView.findViewById(R.id.laptopQuantity);
-            cartSum = itemView.findViewById(R.id.cartSum);
+            laptopSum = itemView.findViewById(R.id.laptopSum);
             btnDelete = itemView.findViewById(R.id.btnDelete);
             btnDecrease = itemView.findViewById(R.id.btnDecrease);
             btnIncrease = itemView.findViewById(R.id.btnIncrease);
@@ -73,6 +73,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         holder.laptopSalePrice.setText(laptop.get("sale_price"));
         holder.laptopPrice.setText(laptop.get("price"));
         holder.laptopQuantity.setText(laptop.get("quantity"));
+
+        // fix loc , vs đ from string
+        int laptopSumInt = Integer.parseInt(laptop.get("sale_price"))  * Integer.parseInt(laptop.get("quantity"));
+        holder.laptopSum.setText(String.valueOf(laptopSumInt));
     }
 
     @Override
