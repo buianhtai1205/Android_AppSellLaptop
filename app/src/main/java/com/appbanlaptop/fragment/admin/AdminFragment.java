@@ -65,6 +65,7 @@ public class AdminFragment extends Fragment {
         // Inflate the layout for this fragment
         Intent intent = new Intent(getActivity(), AdminActivity.class);
         startActivity(intent);
+        getActivity().finish();
         return inflater.inflate(R.layout.fragment_admin, container, false);
     }
 }

@@ -39,6 +39,10 @@
             android:name=".activity.LogoutActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".activity.admin.AdminActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>
