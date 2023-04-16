@@ -63,7 +63,7 @@ import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayoutMain;
-    ImageView imageMenu;
+    ImageView imageMenu, imageViewAds;
     static NavigationView navigationViewMain;
     NavController navController;
 
@@ -72,14 +72,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        ActionBar actionBar = getSupportActionBar();
-//        if (actionBar != null) {
-//            actionBar.hide();
-//        }
 
         AnhXa();
         ActionBar();
-//        MenuHandleWithLogin();
         setItemInMenuWithLogin();
 
     }
@@ -92,102 +87,6 @@ public class MainActivity extends AppCompatActivity {
 
         setItemInMenuWithLogin();
     }
-
-//    private void MenuHandleWithLogin() {
-//        setItemInMenuWithLogin();
-//
-//        Menu menu = navigationViewMain.getMenu();
-//        MenuItem[] previousMenuItem = {menu.findItem(R.id.menuHome)}; //tùy theo MenuItem đầu tiên sẽ khác nhau
-//        previousMenuItem[0].setChecked(true); //set trạng thái checked cho MenuItem đầu tiên
-//
-//        navigationViewMain.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                Fragment selectedFragment = null;
-//                Intent intent = null;
-//                switch (item.getItemId()) {
-//                    case R.id.menuLogin: {
-//                        intent = new Intent(MainActivity.this, LoginActivity.class);
-//                        startActivityForResult(intent, 1);
-//                        break;
-//                    }
-//                    case R.id.menuRegister: {
-//                        intent = new Intent(MainActivity.this, SignUpActivity.class);
-//                        startActivityForResult(intent, 2);
-//                        break;
-//                    }
-//
-//                    case R.id.menuLogout: {
-//                        SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
-//                        SharedPreferences.Editor editor = sharedPreferences.edit();
-//                        editor.remove("user_id");
-//                        editor.apply();
-//                        setItemInMenuWithLogin();
-//                        break;
-//                    }
-//
-//                    case R.id.menuHome: {
-//                        selectedFragment = new HomeFragment();
-//                        break;
-//                    }
-//
-//                    case R.id.menuProfile: {
-//                        selectedFragment = new ProfileFragment();
-//                        break;
-//                    }
-//
-//                    case R.id.menuCart: {
-//                        selectedFragment = new CartFragment();
-//                        break;
-//                    }
-//
-//                    case R.id.menuNotify: {
-//                        selectedFragment = new NotificationFragment();
-//                        break;
-//                    }
-//
-//                    case R.id.menuMessage: {
-//                        selectedFragment = new MessageFragment();
-//                        break;
-//                    }
-//
-//                    case R.id.menuOrderHistory: {
-//                        selectedFragment = new OrderHistoryFragment();
-//                        break;
-//                    }
-//
-//                    case R.id.menuSetting: {
-//                        selectedFragment = new SettingFragment();
-//                        break;
-//                    }
-//
-//                    default:
-//                        break;
-//                }
-//
-//                // Highlight the selected item in the menu
-//                if(item.getItemId() != R.id.menuLogin && item.getItemId() != R.id.menuRegister) {
-//                    previousMenuItem[0].setChecked(false); //bỏ trạng thái check của MenuItem trước đó
-//                    item.setChecked(true);
-//                    previousMenuItem[0] = item; //cập nhật MenuItem trước đó
-//                }
-//
-//                // Replace the fragment or start the activity
-//                if (selectedFragment != null) {
-//                    getSupportFragmentManager().beginTransaction()
-//                            .replace(R.id.nav_host_fragment, selectedFragment)
-//                            .setReorderingAllowed(true)
-//                            .addToBackStack(null)
-//                            .commit();
-//                }
-//
-//                // Close the navigation drawer
-//                drawerLayoutMain.closeDrawer(GravityCompat.START);
-//
-//                return true;
-//            }
-//        });
-//    }
 
     public void setItemInMenuWithLogin() {
         Log.d("MainActivity", "setItemInMenuWithLogin call()");
@@ -249,6 +148,10 @@ public class MainActivity extends AppCompatActivity {
         drawerLayoutMain = findViewById(R.id.drawerLayoutMain);
         imageMenu = findViewById(R.id.imageMenu);
         navigationViewMain = findViewById(R.id.navigationViewMain);
+
+        imageViewAds = findViewById(R.id.imageViewAds);
+        Glide.with(MainActivity.this).load("https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/2023/03/banner/big4-680-88-680x88.png?fbclid=IwAR2W1wA3RaMJeQ2n9ieG0fSxmufY2axgLRZ16bZrU3Qlsn3QrpNuZUFYHDM").into(imageViewAds);
+        imageViewAds.setScaleType(ImageView.ScaleType.FIT_XY);
     }
 
 }

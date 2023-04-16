@@ -15,49 +15,128 @@
 
         <LinearLayout
             android:id="@+id/layoutToolbar"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
             android:background="#ffd400" >
+
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:src="@drawable/shop_logo"
-                android:scaleType="centerCrop" />
+                android:background="#fff"
+                android:id="@+id/imageViewAds"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp" >
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/shop_logo"
+                    android:scaleType="centerCrop" />
+
+                <TextView
+                    android:text="ShopLaptop"
+                    android:gravity="left|center"
+                    android:textColor="#ff3333"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.4"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.15"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:src="@drawable/cart"
+                    app:maxImageSize="25dp"
+                    android:contentDescription="TODO">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/imageMenu"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.15"
+                    android:layout_height="match_parent"
+                    android:tint="#000"
+                    android:src="@drawable/ic_menu"/>
+            </LinearLayout>
+
             <EditText
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
                 android:background="@drawable/brand_background"
                 android:drawableStart="@drawable/search"
                 android:drawablePadding="10dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_margin="5dp"
                 android:ems="10"
-                android:hint="Find laptop ..."
+                android:hint="Bạn đang tìm gì ..."
                 android:inputType="textPersonName"
                 android:paddingStart="20dp"
                 android:textSize="14sp"
                 android:textStyle="italic"
                 android:autofillHints="" />
 
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:padding="10dp"
-                android:src="@drawable/shopping_cart"
-                app:maxImageSize="25dp"
-                android:contentDescription="TODO">
-            </ImageView>
-
-            <ImageView
-                android:id="@+id/imageMenu"
+            <LinearLayout
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:tint="#fff"
-                android:src="@drawable/ic_menu"/>
-
+                android:layout_height="wrap_content" >
+                <TextView
+                    android:text="Deal sốc"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textColor="#000"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="Gaming"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textColor="#000"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="Mackbook"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textColor="#000"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="Học tập"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textColor="#000"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="kỹ thuật"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textColor="#000"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="Cao cấp"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textColor="#000"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
         </LinearLayout>
 
         <androidx.fragment.app.FragmentContainerView
