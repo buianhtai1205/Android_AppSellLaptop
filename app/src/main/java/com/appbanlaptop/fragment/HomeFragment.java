@@ -116,11 +116,8 @@ public class HomeFragment extends Fragment {
 
         AnhXa();
 
-//        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment);
-
         //Function
         if (isConnected(getContext())) {
-//            Toast.makeText(getContext(), "Connect successful!", Toast.LENGTH_LONG).show();
             ActionViewFlipper();
             getListBrands();
             getListLaptops("gaming");
