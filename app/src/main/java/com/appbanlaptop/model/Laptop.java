@@ -18,9 +18,10 @@ public class Laptop {
     private int year_launch;
     private String image_url;
     private String description;
+    private int status;
     private Brand brand;
 
-    public Laptop(int id, String name, String screen, String cpu, String card, String ram, String rom, String pin, float weight, String os, String connector, int price, int sale_price, String special, int year_launch, String image_url, String description, Brand brand) {
+    public Laptop(int id, String name, String screen, String cpu, String card, String ram, String rom, String pin, float weight, String os, String connector, int price, int sale_price, String special, int year_launch, String image_url, String description, int status, Brand brand) {
         this.id = id;
         this.name = name;
         this.screen = screen;
@@ -38,6 +39,7 @@ public class Laptop {
         this.year_launch = year_launch;
         this.image_url = image_url;
         this.description = description;
+        this.status = status;
         this.brand = brand;
     }
 
@@ -183,5 +185,13 @@ public class Laptop {
 
     public void setPin(String pin) {
         this.pin = pin;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

@@ -7,8 +7,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,7 +28,7 @@ import com.appbanlaptop.model.Laptop;
 import com.appbanlaptop.model.LaptopModel;
 import com.appbanlaptop.retrofit.ApiShopLapTop;
 import com.appbanlaptop.retrofit.RetrofitClient;
-import com.appbanlaptop.utils.Utils;
+import com.appbanlaptop.adapter.utils.Utils;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;

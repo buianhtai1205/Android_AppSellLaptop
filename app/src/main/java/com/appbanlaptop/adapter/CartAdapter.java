@@ -1,7 +1,8 @@
 package com.appbanlaptop.adapter;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +12,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.appbanlaptop.R;
+import com.appbanlaptop.adapter.utils.Utils;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +33,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public CartAdapter(HashMap<Integer, HashMap<String, String>> cart) {
         Log.d("CartAdapter", "Constructor call()");
         this.cart = cart;
+
+        Utils.total = 0;
+        for (Map.Entry<Integer, HashMap<String, String>> entry : cart.entrySet()) {
+            HashMap<String, String> laptop = entry.getValue();
+            String sale_price =laptop.get("sale_price");
+            sale_price = sale_price.replace(",", "");
+            sale_price = sale_price.replace("đ", "");
+            int price = Integer.parseInt(sale_price);
+            int quantity = Integer.parseInt(laptop.get("quantity"));
+            Utils.total += price * quantity;
+        }
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -46,7 +61,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             btnDelete = itemView.findViewById(R.id.btnDelete);
             btnDecrease = itemView.findViewById(R.id.btnDecrease);
             btnIncrease = itemView.findViewById(R.id.btnIncrease);
-            Log.d("CartAdapter", "ViewHolder call()");
         }
     }
 
@@ -59,12 +73,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CartAdapter.ViewHolder holder, int position) {
-        Log.d("CartAdapter", "onBlindVIewHolder call()");
 
         Integer[] laptopIds = this.cart.keySet().toArray(new Integer[0]); // Lấy danh sách các id trong cart
 
         int laptopId = laptopIds[position]; // Lấy id của laptop tại vị trí position
-        Log.d("CartAdapter", String.valueOf(laptopId));
 
         HashMap<String, String> laptop = this.cart.get(laptopId); // Lấy thông tin của laptop tương ứng với id đó
 
@@ -72,11 +84,69 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         holder.laptopName.setText(laptop.get("name"));
         holder.laptopSalePrice.setText(laptop.get("sale_price"));
         holder.laptopPrice.setText(laptop.get("price"));
+        holder.laptopPrice.setPaintFlags(holder.laptopPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         holder.laptopQuantity.setText(laptop.get("quantity"));
 
-        // fix loc , vs đ from string
-        int laptopSumInt = Integer.parseInt(laptop.get("sale_price"))  * Integer.parseInt(laptop.get("quantity"));
-        holder.laptopSum.setText(String.valueOf(laptopSumInt));
+        String sale_price =laptop.get("sale_price");
+        sale_price = sale_price.replace(",", "");
+        sale_price = sale_price.replace("đ", "");
+
+        int laptopSumInt = Integer.parseInt(sale_price)  * Integer.parseInt(laptop.get("quantity"));
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        holder.laptopSum.setText(decimalFormat.format(laptopSumInt) + "đ");
+
+        holder.btnIncrease.setOnClickListener(view -> {
+            int newQuantity = Integer.parseInt(holder.laptopQuantity.getText().toString()) + 1;
+
+            updateCartToSharedPreferences(holder, laptopId, newQuantity);
+
+            Navigation.findNavController(view).navigate(R.id.menuCart);
+        });
+
+        holder.btnDecrease.setOnClickListener(view -> {
+            int newQuantity = Integer.parseInt(holder.laptopQuantity.getText().toString());
+            if (newQuantity >= 2) {
+                newQuantity--;
+
+                updateCartToSharedPreferences(holder, laptopId, newQuantity);
+                Navigation.findNavController(view).navigate(R.id.menuCart);
+            }
+        });
+
+        holder.btnDelete.setOnClickListener(view -> {
+            if (cart.containsKey(laptopId)) {
+                cart.remove(laptopId);
+                notifyDataSetChanged();
+                saveCartToSharedPreferences(cart, holder);
+                Navigation.findNavController(view).navigate(R.id.menuCart);
+            }
+        });
+    }
+
+    private void saveCartToSharedPreferences(HashMap<Integer, HashMap<String, String>> cart, @NonNull CartAdapter.ViewHolder holder) {
+        SharedPreferences sharedPreferences = holder.itemView.getContext().getSharedPreferences("CartPrefs", Activity.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = gson.toJson(cart);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("cart", json);
+        editor.apply();
+    }
+
+    private void updateCartToSharedPreferences(@NonNull ViewHolder holder, int laptopId, int newQuantity) {
+        SharedPreferences sharedPreferences = holder.itemView.getContext().getSharedPreferences("CartPrefs", Activity.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("cart", "");
+        Type type = new TypeToken<HashMap<Integer, HashMap<String, String>>>() {}.getType();
+        HashMap<Integer, HashMap<String, String>> newCart = gson.fromJson(json, type);
+
+        if (newCart != null) {
+            if (newCart.containsKey(laptopId)) {
+                HashMap<String, String> laptop = newCart.get(laptopId);
+                laptop.put("quantity", String.valueOf(newQuantity));
+                newCart.put(laptopId, laptop);
+                saveCartToSharedPreferences(newCart, holder);
+            }
+        }
     }
 
     @Override

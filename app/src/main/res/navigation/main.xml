@@ -24,7 +24,14 @@
         android:id="@+id/menuCart"
         android:name="com.appbanlaptop.fragment.CartFragment"
         android:label="Cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_menuCart_to_checkoutFragment"
+            app:destination="@id/checkoutFragment" />
+        <action
+            android:id="@+id/action_menuCart_to_menuHome"
+            app:destination="@id/menuHome" />
+    </fragment>
 
     <fragment
         android:id="@+id/menuNotify"
@@ -81,5 +88,10 @@
         android:name="com.appbanlaptop.fragment.admin.AdminFragment"
         android:label="fragment_admin"
         tools:layout="@layout/fragment_admin" />
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.appbanlaptop.fragment.CheckoutFragment"
+        android:label="fragment_checkout"
+        tools:layout="@layout/fragment_checkout" />
 
 </navigation>
