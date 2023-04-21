@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 
 import com.appbanlaptop.R;
 import com.appbanlaptop.activity.LoginActivity;
-import com.appbanlaptop.adapter.utils.Utils;
+import com.appbanlaptop.utils.Utils;
 
 /**
  * A simple {@link Fragment} subclass.

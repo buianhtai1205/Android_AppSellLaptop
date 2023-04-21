@@ -28,7 +28,7 @@ import com.appbanlaptop.model.Laptop;
 import com.appbanlaptop.model.LaptopModel;
 import com.appbanlaptop.retrofit.ApiShopLapTop;
 import com.appbanlaptop.retrofit.RetrofitClient;
-import com.appbanlaptop.adapter.utils.Utils;
+import com.appbanlaptop.utils.Utils;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;

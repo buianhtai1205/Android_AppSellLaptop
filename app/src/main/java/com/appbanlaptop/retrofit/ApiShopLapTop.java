@@ -40,5 +40,8 @@ public interface ApiShopLapTop {
             @Field("address") String address,
             @Field("phone_number") String phone_number
     );
+
+    @GET("user/get_user.php?")
+    Call<UserModel> getUser(@Query("id") String id);
 }
 

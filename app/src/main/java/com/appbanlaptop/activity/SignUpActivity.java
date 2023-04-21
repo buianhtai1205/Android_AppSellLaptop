@@ -13,7 +13,7 @@ import com.appbanlaptop.R;
 import com.appbanlaptop.model.UserModel;
 import com.appbanlaptop.retrofit.ApiShopLapTop;
 import com.appbanlaptop.retrofit.RetrofitClient;
-import com.appbanlaptop.adapter.utils.Utils;
+import com.appbanlaptop.utils.Utils;
 
 import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 import retrofit2.Call;

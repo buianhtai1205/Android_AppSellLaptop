@@ -16,7 +16,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.appbanlaptop.R;
-import com.appbanlaptop.adapter.utils.Utils;
+import com.appbanlaptop.utils.Utils;
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 

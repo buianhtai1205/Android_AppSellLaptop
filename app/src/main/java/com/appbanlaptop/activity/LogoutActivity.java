@@ -9,7 +9,7 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.appbanlaptop.adapter.utils.Utils;
+import com.appbanlaptop.utils.Utils;
 
 
 public class LogoutActivity extends AppCompatActivity {

@@ -9,6 +9,7 @@ public class User {
     private String address;
     private String phone_number;
     private String image_url;
+    private int status;
     private String role;
 
     public User(String username, String password) {
@@ -98,5 +99,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

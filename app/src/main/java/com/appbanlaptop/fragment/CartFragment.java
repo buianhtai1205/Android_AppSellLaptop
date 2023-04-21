@@ -1,5 +1,6 @@
 package com.appbanlaptop.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -21,7 +22,7 @@ import android.widget.Toast;
 
 import com.appbanlaptop.R;
 import com.appbanlaptop.adapter.CartAdapter;
-import com.appbanlaptop.adapter.utils.Utils;
+import com.appbanlaptop.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -139,12 +140,26 @@ public class CartFragment extends Fragment {
             Navigation.findNavController(view).navigate(R.id.action_menuCart_to_menuHome);
         });
         btnCheckout.setOnClickListener(view -> {
-            if (Utils.total > 0) {
-                Navigation.findNavController(view).navigate(R.id.action_menuCart_to_checkoutFragment);
+            if (Utils.total > 0 ) {
+                if (isLogin()) {
+                    Navigation.findNavController(view).navigate(R.id.action_menuCart_to_checkoutFragment);
+                } else {
+                    Toast.makeText(getContext(), "Vui lòng đăng nhập trước!", Toast.LENGTH_LONG).show();
+                }
             } else {
                 Toast.makeText(getContext(), "Không có sản phẩm nào trong giỏ hàng!", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private boolean isLogin() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LoginPrefs", Activity.MODE_PRIVATE);
+        int userId = sharedPreferences.getInt("user_id", 0);
+
+        if (userId == 0) {
+            return false;
+        }
+        return true;
     }
 
     private boolean isConnected(Context context) {
