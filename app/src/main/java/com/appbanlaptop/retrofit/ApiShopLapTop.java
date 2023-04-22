@@ -3,12 +3,15 @@ package com.appbanlaptop.retrofit;
 
 import com.appbanlaptop.model.BrandModel;
 import com.appbanlaptop.model.LaptopModel;
+import com.appbanlaptop.model.Order;
+import com.appbanlaptop.model.OrderModel;
 import com.appbanlaptop.model.UserModel;
 
 import java.util.HashMap;
 
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -43,5 +46,8 @@ public interface ApiShopLapTop {
 
     @GET("user/get_user.php?")
     Call<UserModel> getUser(@Query("id") String id);
+
+    @POST("order/order.php")
+    Call<OrderModel> createOrder(@Body Order order);
 }
 

@@ -10,7 +10,13 @@ public class Order {
     private String phone_receive;
     private String message;
     private int total_price;
+    private String pay_method;
+    private int paid;
     private List<OrderDetail> orderDetails;
+
+    public Order() {
+
+    }
 
     public Order(int id, int user_id, String name_receive, String address_receive, String phone_receive, String message, int total_price, List<OrderDetail> orderDetails) {
         this.id = id;
@@ -85,5 +91,21 @@ public class Order {
 
     public void setOrderDetails(List<OrderDetail> orderDetails) {
         this.orderDetails = orderDetails;
+    }
+
+    public String getPay_method() {
+        return pay_method;
+    }
+
+    public void setPay_method(String pay_method) {
+        this.pay_method = pay_method;
+    }
+
+    public int getPaid() {
+        return paid;
+    }
+
+    public void setPaid(int paid) {
+        this.paid = paid;
     }
 }

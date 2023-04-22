@@ -35,14 +35,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         this.cart = cart;
 
         Utils.total = 0;
-        for (Map.Entry<Integer, HashMap<String, String>> entry : cart.entrySet()) {
-            HashMap<String, String> laptop = entry.getValue();
-            String sale_price =laptop.get("sale_price");
-            sale_price = sale_price.replace(",", "");
-            sale_price = sale_price.replace("đ", "");
-            int price = Integer.parseInt(sale_price);
-            int quantity = Integer.parseInt(laptop.get("quantity"));
-            Utils.total += price * quantity;
+        if (cart != null) {
+            for (Map.Entry<Integer, HashMap<String, String>> entry : cart.entrySet()) {
+                HashMap<String, String> laptop = entry.getValue();
+                String sale_price =laptop.get("sale_price");
+                sale_price = sale_price.replace(",", "");
+                sale_price = sale_price.replace("đ", "");
+                int price = Integer.parseInt(sale_price);
+                int quantity = Integer.parseInt(laptop.get("quantity"));
+                Utils.total += price * quantity;
+            }
         }
     }
 

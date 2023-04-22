@@ -6,6 +6,8 @@ public class OrderDetail {
     private int laptop_id;
     private int quantity;
 
+    public OrderDetail() {}
+
     public OrderDetail(int id, int order_id, int laptop_id, int quantity) {
         this.id = id;
         this.order_id = order_id;

@@ -8,10 +8,10 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +25,9 @@ import android.widget.Toast;
 
 import com.appbanlaptop.R;
 import com.appbanlaptop.adapter.CheckoutAdapter;
+import com.appbanlaptop.model.Order;
+import com.appbanlaptop.model.OrderDetail;
+import com.appbanlaptop.model.OrderModel;
 import com.appbanlaptop.model.User;
 import com.appbanlaptop.model.UserModel;
 import com.appbanlaptop.retrofit.ApiShopLapTop;
@@ -35,7 +38,11 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 import retrofit2.Call;
@@ -65,10 +72,12 @@ public class CheckoutFragment extends Fragment {
     EditText etFullName, etPhoneNumber, etAddress, etMessage;
     Button btnCheckout;
     LinearLayout layoutHome, layoutStore;
-    RadioGroup rbgGender, rbgReceive;
-    RadioButton rbMale, rbFeMale, rbTransHome, rbReceiveStore;
+    RadioGroup rbgGender, rbgReceive, rbgPayment;
+    RadioButton rbMale, rbFeMale, rbTransHome, rbReceiveStore, rbOffline, rbOnline;
     CheckoutAdapter checkoutAdapter;
     ApiShopLapTop apiShopLapTop;
+    String payMethod = "ATHOME", oldPM;
+    Order order;
 
     public CheckoutFragment() {
         // Required empty public constructor
@@ -123,6 +132,8 @@ public class CheckoutFragment extends Fragment {
 
             handleRadioGroup();
 
+            handleCheckout();
+
         } else {
             Toast.makeText(getContext(), "Connect fail!", Toast.LENGTH_LONG).show();
         }
@@ -130,9 +141,77 @@ public class CheckoutFragment extends Fragment {
         return layoutView;
     }
 
+    private void setInfoForOrder() {
+        order.setUser_id(Utils.user_id);
+        order.setName_receive(etFullName.getText().toString());
+        order.setAddress_receive(etAddress.getText().toString());
+        order.setPhone_receive(etPhoneNumber.getText().toString());
+        order.setMessage(etMessage.getText().toString());
+        order.setTotal_price(Utils.total);
+        order.setPay_method(payMethod);
+
+        List<OrderDetail> list = new ArrayList<>();
+        HashMap<Integer, HashMap<String, String>> cart;
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("CartPrefs", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("cart", "");
+        Type type = new TypeToken<HashMap<Integer, HashMap<String, String>>>() {}.getType();
+        cart = gson.fromJson(json, type);
+
+        for (Map.Entry<Integer, HashMap<String, String>> entry : cart.entrySet()) {
+            Integer laptopId = entry.getKey();
+            HashMap<String, String> laptop = entry.getValue();
+            OrderDetail orderDetail = new OrderDetail();
+            orderDetail.setLaptop_id(laptopId);
+            orderDetail.setQuantity(Integer.parseInt(laptop.get("quantity")));
+            list.add(orderDetail);
+        }
+        order.setOrderDetails(list);
+    }
+
+    private void checkout() {
+        Call<OrderModel> call = apiShopLapTop.createOrder(order);
+        call.enqueue(new Callback<OrderModel>() {
+            @Override
+            public void onResponse(Call<OrderModel> call, Response<OrderModel> response) {
+                OrderModel orderModel = response.body();
+                if (orderModel.isSuccess()) {
+                    Toast.makeText(getContext(), orderModel.getMessage(), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getContext(), orderModel.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OrderModel> call, Throwable t) {
+                Toast.makeText(getContext(), "Lỗi kết nối đến server", Toast.LENGTH_LONG).show();
+                call.cancel();
+            }
+        });
+    }
+
+    private void afterCheckout() {
+        Utils.total = 0;
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("CartPrefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("cart");
+        editor.apply();
+    }
+
+    private void handleCheckout() {
+        btnCheckout.setOnClickListener(view -> {
+            order = new Order();
+            setInfoForOrder();
+            checkout();
+            afterCheckout();
+            Navigation.findNavController(view).navigate(R.id.menuHome);
+        });
+    }
+
     private void getInfoUser() {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LoginPrefs", Activity.MODE_PRIVATE);
         int userId = sharedPreferences.getInt("user_id", 0);
+        Utils.user_id = userId;
 
         Call<UserModel> call = apiShopLapTop.getUser(String.valueOf(userId));
         call.enqueue(new Callback<UserModel>() {
@@ -152,7 +231,7 @@ public class CheckoutFragment extends Fragment {
             @Override
             public void onFailure(Call<UserModel> call, Throwable t) {
                 call.cancel();
-                Toast.makeText(getContext(), "Lỗi Kết nối đến Server!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Lỗi kết nối đến Server!", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -170,9 +249,20 @@ public class CheckoutFragment extends Fragment {
             if (checkedId == rbReceiveStore.getId()) {
                 layoutStore.setVisibility(View.VISIBLE);
                 layoutHome.setVisibility(View.GONE);
+                payMethod = "ATSTORE";
             } else if (checkedId == rbTransHome.getId()) {
                 layoutHome.setVisibility(View.VISIBLE);
                 layoutStore.setVisibility(View.GONE);
+                payMethod = "ATHOME";
+            }
+        });
+
+        rbgPayment.setOnCheckedChangeListener((radioGroup, checkedId) -> {
+            if (checkedId == rbOffline.getId()) {
+                payMethod = oldPM;
+            } else if (checkedId == rbOnline.getId()) {
+                oldPM = payMethod;
+                payMethod = "ZALOPAY";
             }
         });
 
@@ -213,6 +303,10 @@ public class CheckoutFragment extends Fragment {
         rbgReceive = layoutView.findViewById(R.id.rbgReceive);
         rbTransHome = layoutView.findViewById(R.id.rbTransHome);
         rbReceiveStore = layoutView.findViewById(R.id.rbReceiveStore);
+
+        rbgPayment = layoutView.findViewById(R.id.rbgPayment);
+        rbOffline = layoutView.findViewById(R.id.rbOffline);
+        rbOnline = layoutView.findViewById(R.id.rbOnline);
     }
 
     private boolean isConnected(Context context) {

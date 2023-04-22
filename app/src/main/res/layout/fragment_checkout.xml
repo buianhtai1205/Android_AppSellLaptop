@@ -263,6 +263,46 @@
                     android:layout_marginTop="10dp"
                     android:background="#d1d1d1" />
 
+                <!-- Thanh Toán-->
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+                    <TextView
+                        android:text="CHỌN HÌNH THỨC THANH TOÁN"
+                        android:textColor="#ff1a1a"
+                        android:textStyle="bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <RadioGroup
+                        android:id="@+id/rbgPayment"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <RadioButton
+                            android:id="@+id/rbOffline"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:checked="true"
+                            android:drawableEnd="@drawable/payment"
+                            android:paddingEnd="100dp"
+                            android:text="Thanh toán trực tiếp khi nhận hàng"
+                            android:textColor="#000" />
+
+                        <RadioButton
+                            android:id="@+id/rbOnline"
+                            android:paddingEnd="100dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:drawableEnd="@drawable/zalopay"
+                            android:text="Thanh toán online ZaloPay"
+                            android:textColor="#000" />
+                    </RadioGroup>
+                </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -298,12 +338,6 @@
                 android:backgroundTint="#f7712e"
                 android:text="ĐẶT HÀNG"
                 android:textColor="#fff" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Bạn có thể chọn hình thức thanh toán sau khi đặt hàng."
-                android:textAlignment="center" />
 
             <TextView
                 android:layout_width="match_parent"

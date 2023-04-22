@@ -120,8 +120,6 @@ public class CartFragment extends Fragment {
 
         cartAdapter = new CartAdapter(cart);
 
-        Log.d("CartFrag", String.valueOf(cart.size()));
-
         LinearLayoutManager linearLayoutManager =new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerViewCart.setLayoutManager(linearLayoutManager);
 
