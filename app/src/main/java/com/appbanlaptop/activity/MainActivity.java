@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
@@ -16,13 +17,14 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.appbanlaptop.R;
+import com.appbanlaptop.fragment.CartFragment;
 import com.appbanlaptop.utils.Utils;
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayoutMain;
-    ImageView imageMenu, imageViewAds;
+    ImageView imageMenu, imageViewAds, btnCart;
     static NavigationView navigationViewMain;
     NavController navController;
 
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         AnhXa();
         ActionBar();
         setItemInMenuWithLogin();
-
+        handleCart();
     }
 
     @Override
@@ -45,6 +47,15 @@ public class MainActivity extends AppCompatActivity {
         Log.d("MainActivity", "onActivityResult call()");
 
         setItemInMenuWithLogin();
+    }
+
+    private void handleCart() {
+        btnCart.setOnClickListener(view -> {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.nav_host_fragment, new CartFragment())
+                    .addToBackStack(null)
+                    .commit();
+        });
     }
 
     public void setItemInMenuWithLogin() {
@@ -111,6 +122,8 @@ public class MainActivity extends AppCompatActivity {
         imageViewAds = findViewById(R.id.imageViewAds);
         Glide.with(MainActivity.this).load("https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/2023/03/banner/big4-680-88-680x88.png?fbclid=IwAR2W1wA3RaMJeQ2n9ieG0fSxmufY2axgLRZ16bZrU3Qlsn3QrpNuZUFYHDM").into(imageViewAds);
         imageViewAds.setScaleType(ImageView.ScaleType.FIT_XY);
+
+        btnCart = findViewById(R.id.btnCart);
     }
 
 }

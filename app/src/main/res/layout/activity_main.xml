@@ -50,6 +50,7 @@
                     android:layout_height="match_parent" />
 
                 <ImageView
+                    android:id="@+id/btnCart"
                     android:layout_width="0dp"
                     android:layout_weight="0.15"
                     android:layout_height="match_parent"

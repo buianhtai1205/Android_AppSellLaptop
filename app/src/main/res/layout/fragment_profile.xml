@@ -1,16 +1,247 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
     tools:context=".fragment.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="20sp"
-        android:layout_gravity="center"
-        android:text="Profile" />
+        android:layout_height="10000dp" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageViewAvatar"
+                android:layout_width="151dp"
+                android:layout_height="151dp"
+                android:src="@drawable/logo"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="33dp" />
+
+            <TextView
+                android:id="@+id/tvFullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="188dp"
+                android:layout_marginTop="56dp"
+                android:text="Bùi Anh Tài"
+                android:textColor="#000"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvRole"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="236dp"
+                android:layout_marginTop="112dp"
+                android:text="Vai trò: User"
+                android:textColor="#ccc"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnUpdate"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/update_btn_background"
+                android:padding="5dp"
+                android:text="Cập nhật thông tin"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewAvatar"
+                tools:ignore="MissingConstraints" />
+
+            <Button
+                android:id="@+id/btnChangePassword"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="35dp"
+                android:background="@drawable/login_btn_background"
+                android:padding="5dp"
+                android:text="Đổi mật khẫu"
+                android:textColor="#fff"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewAvatar"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="290dp"
+                android:text="Thông tin tài khoản"
+                android:textColor="#000"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="350dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints">
+
+                <LinearLayout
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    tools:layout_editor_absoluteX="-13dp"
+                    tools:layout_editor_absoluteY="367dp">
+                    <ImageView
+                        android:src="@drawable/user"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:gravity="left|center"
+                        android:layout_marginStart="10dp"
+                        android:text="Username: "
+                        android:textColor="#000"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:id="@+id/tvUsername"
+                        android:gravity="left|center"
+                        android:text="anhtai"
+                        android:textColor="#000"
+                        android:textStyle="italic"
+                        android:textSize="20sp"
+                        android:layout_width="0dp"
+                        android:layout_weight="4"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="15dp"
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:orientation="horizontal"
+                    tools:layout_editor_absoluteX="-13dp"
+                    tools:layout_editor_absoluteY="367dp">
+                    <ImageView
+                        android:src="@drawable/email"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="50dp" />
+                    <TextView
+                        android:gravity="left|center"
+                        android:layout_marginStart="10dp"
+                        android:text="Email: "
+                        android:textColor="#000"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="50dp" />
+                    <TextView
+                        android:id="@+id/tvEmail"
+                        android:gravity="left|center"
+                        android:text="buianhtai2017tq@gmail.com"
+                        android:textColor="#000"
+                        android:textStyle="italic"
+                        android:textSize="20sp"
+                        android:layout_width="0dp"
+                        android:layout_weight="4"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+                <LinearLayout
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    tools:layout_editor_absoluteX="-13dp"
+                    tools:layout_editor_absoluteY="367dp">
+                    <ImageView
+                        android:src="@drawable/address"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:gravity="left|center"
+                        android:layout_marginStart="10dp"
+                        android:text="Address: "
+                        android:textColor="#000"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:id="@+id/tvAddress"
+                        android:gravity="left|center"
+                        android:text="Quận 9, Tp HCM"
+                        android:textColor="#000"
+                        android:textStyle="italic"
+                        android:textSize="20sp"
+                        android:layout_width="0dp"
+                        android:layout_weight="4"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="15dp"
+                    android:padding="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    tools:layout_editor_absoluteX="-13dp"
+                    tools:layout_editor_absoluteY="367dp">
+                    <ImageView
+                        android:src="@drawable/phone_number"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:gravity="left|center"
+                        android:layout_marginStart="10dp"
+                        android:text="Phone: "
+                        android:textColor="#000"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:id="@+id/tvPhoneNumber"
+                        android:gravity="left|center"
+                        android:text="0369258147"
+                        android:textColor="#000"
+                        android:textStyle="italic"
+                        android:textSize="20sp"
+                        android:layout_width="0dp"
+                        android:layout_weight="4"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
 
 </FrameLayout>
