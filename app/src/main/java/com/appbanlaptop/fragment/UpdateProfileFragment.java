@@ -1,28 +1,21 @@
 package com.appbanlaptop.fragment;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.appbanlaptop.R;
-import com.appbanlaptop.activity.MainActivity;
-import com.appbanlaptop.activity.admin.AdminActivity;
 import com.appbanlaptop.model.User;
 import com.appbanlaptop.model.UserModel;
 import com.appbanlaptop.retrofit.ApiShopLapTop;
@@ -30,7 +23,6 @@ import com.appbanlaptop.retrofit.RetrofitClient;
 import com.appbanlaptop.utils.Utils;
 import com.bumptech.glide.Glide;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,10 +31,10 @@ import timber.log.Timber;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ProfileFragment#newInstance} factory method to
+ * Use the {@link UpdateProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProfileFragment extends Fragment {
+public class UpdateProfileFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -55,12 +47,12 @@ public class ProfileFragment extends Fragment {
 
 
     View layoutView;
-    CircleImageView imageViewAvatar;
-    TextView tvFullName, tvRole, tvUsername, tvEmail, tvAddress, tvPhoneNumber;
-    Button btnUpdate, btnChangePassword;
+    EditText etFullName, etAddress, etPhoneNumber, etImageUrl;
+    Button btnUpdate, btnCancel;
 
     ApiShopLapTop apiShopLapTop;
-    public ProfileFragment() {
+
+    public UpdateProfileFragment() {
         // Required empty public constructor
     }
 
@@ -70,11 +62,11 @@ public class ProfileFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfileFragment.
+     * @return A new instance of fragment UpdateProfileFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProfileFragment newInstance(String param1, String param2) {
-        ProfileFragment fragment = new ProfileFragment();
+    public static UpdateProfileFragment newInstance(String param1, String param2) {
+        UpdateProfileFragment fragment = new UpdateProfileFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -95,7 +87,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        layoutView = inflater.inflate(R.layout.fragment_profile, container, false);
+        layoutView = inflater.inflate(R.layout.fragment_update_profile, container, false);
         RxJavaPlugins.setErrorHandler(Timber::e);
 
         apiShopLapTop = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiShopLapTop.class);
@@ -104,7 +96,7 @@ public class ProfileFragment extends Fragment {
 
         if (isConnected(getContext())) {
             setData();
-            handleEventButton();
+            handleButton();
         } else {
             Toast.makeText(getContext(), "Connect fail!", Toast.LENGTH_LONG).show();
         }
@@ -112,66 +104,62 @@ public class ProfileFragment extends Fragment {
         return layoutView;
     }
 
-    private void handleEventButton() {
-
+    private void handleButton() {
         btnUpdate.setOnClickListener(view -> {
-            Navigation.findNavController(view).navigate(R.id.action_menuProfile_to_updateProfileFragment);
-        });
+            String fullName = etFullName.getText().toString();
+            String address = etAddress.getText().toString();
+            String phoneNumber = etPhoneNumber.getText().toString();
+            String imageUrl = etImageUrl.getText().toString();
 
-        btnChangePassword.setOnClickListener(view -> {
-            Navigation.findNavController(view).navigate(R.id.action_menuProfile_to_changePasswordFragment);
-        });
-    }
-
-    private void setData() {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("LoginPrefs", Activity.MODE_PRIVATE);
-        int userId = sharedPreferences.getInt("user_id", 0);
-
-        if (userId == 0) {
-            Toast.makeText(getContext(), "Vui lòng đăng nhập trước!", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            startActivity(intent);
-            getActivity().finish();
-        } else {
-            Utils.user_id = userId;
-            Call<UserModel> call = apiShopLapTop.getUser(String.valueOf(userId));
+            Call<UserModel> call = apiShopLapTop.updateProfile(Utils.user_id, fullName, address, phoneNumber, imageUrl);
             call.enqueue(new Callback<UserModel>() {
                 @Override
                 public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                     UserModel userModel = response.body();
                     if (userModel.isSuccess()) {
-                        User user = userModel.getResult().get(0);
-                        Glide.with(getContext()).load(user.getImage_url()).into(imageViewAvatar);
-                        tvFullName.setText(user.getFullname());
-                        tvRole.setText("Vai trò: " + user.getRole());
-                        tvUsername.setText(user.getUsername());
-                        tvEmail.setText(user.getEmail());
-                        tvAddress.setText(user.getAddress());
-                        tvPhoneNumber.setText(user.getPhone_number());
+                        Toast.makeText(getContext(), userModel.getMessage(), Toast.LENGTH_LONG).show();
+                        Navigation.findNavController(view).navigate(R.id.action_updateProfileFragment_to_menuProfile);
                     } else {
-                        Toast.makeText(getContext(), "Người dùng không tồn tại, lỗi hệ thống!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), userModel.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<UserModel> call, Throwable t) {
+                    Toast.makeText(getContext(), "Lỗi kết nối đến server!", Toast.LENGTH_LONG).show();
                     call.cancel();
-                    Toast.makeText(getContext(), "Lỗi kết nối đến Server!", Toast.LENGTH_LONG).show();
                 }
             });
-        }
+        });
+
+        btnCancel.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_updateProfileFragment_to_menuProfile);
+        });
     }
 
-    private void AnhXa() {
-        imageViewAvatar = layoutView.findViewById(R.id.imageViewAvatar);
-        tvFullName = layoutView.findViewById(R.id.tvFullName);
-        tvRole = layoutView.findViewById(R.id.tvRole);
-        tvUsername = layoutView.findViewById(R.id.tvUsername);
-        tvEmail = layoutView.findViewById(R.id.tvEmail);
-        tvAddress = layoutView.findViewById(R.id.tvAddress);
-        tvPhoneNumber = layoutView.findViewById(R.id.tvPhoneNumber);
-        btnUpdate = layoutView.findViewById(R.id.btnUpdate);
-        btnChangePassword = layoutView.findViewById(R.id.btnChangePassword);
+    private void setData() {
+        Call<UserModel> call = apiShopLapTop.getUser(String.valueOf(Utils.user_id));
+        call.enqueue(new Callback<UserModel>() {
+            @Override
+            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+                UserModel userModel = response.body();
+                if (userModel.isSuccess()) {
+                    User user = userModel.getResult().get(0);
+                    etFullName.setText(user.getFullname());
+                    etAddress.setText(user.getAddress());
+                    etPhoneNumber.setText(user.getPhone_number());
+                    etImageUrl.setText(user.getImage_url());
+                } else {
+                    Toast.makeText(getContext(), "Người dùng không tồn tại, lỗi hệ thống!", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserModel> call, Throwable t) {
+                call.cancel();
+                Toast.makeText(getContext(), "Lỗi kết nối đến Server!", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private boolean isConnected(Context context) {
@@ -182,5 +170,15 @@ public class ProfileFragment extends Fragment {
             return true;
         }
         return false;
+    }
+
+    private void AnhXa() {
+        etFullName = layoutView.findViewById(R.id.etFullName);
+        etAddress = layoutView.findViewById(R.id.etAddress);
+        etPhoneNumber = layoutView.findViewById(R.id.etPhoneNumber);
+        etImageUrl = layoutView.findViewById(R.id.etImageUrl);
+
+        btnCancel = layoutView.findViewById(R.id.btnCancel);
+        btnUpdate = layoutView.findViewById(R.id.btnUpdate);
     }
 }

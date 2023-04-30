@@ -18,7 +18,14 @@
         android:id="@+id/menuProfile"
         android:name="com.appbanlaptop.fragment.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_menuProfile_to_updateProfileFragment"
+            app:destination="@id/updateProfileFragment" />
+        <action
+            android:id="@+id/action_menuProfile_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/menuCart"
@@ -93,5 +100,23 @@
         android:name="com.appbanlaptop.fragment.CheckoutFragment"
         android:label="fragment_checkout"
         tools:layout="@layout/fragment_checkout" />
+    <fragment
+        android:id="@+id/updateProfileFragment"
+        android:name="com.appbanlaptop.fragment.UpdateProfileFragment"
+        android:label="fragment_update_profile"
+        tools:layout="@layout/fragment_update_profile" >
+        <action
+            android:id="@+id/action_updateProfileFragment_to_menuProfile"
+            app:destination="@id/menuProfile" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.appbanlaptop.fragment.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" >
+        <action
+            android:id="@+id/action_changePasswordFragment_to_menuProfile"
+            app:destination="@id/menuProfile" />
+    </fragment>
 
 </navigation>

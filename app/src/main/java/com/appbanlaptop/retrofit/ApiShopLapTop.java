@@ -1,6 +1,8 @@
 package com.appbanlaptop.retrofit;
 
 
+import android.content.Intent;
+
 import com.appbanlaptop.model.BrandModel;
 import com.appbanlaptop.model.LaptopModel;
 import com.appbanlaptop.model.Order;
@@ -49,5 +51,23 @@ public interface ApiShopLapTop {
 
     @POST("order/order.php")
     Call<OrderModel> createOrder(@Body Order order);
+
+    @FormUrlEncoded
+    @POST("user/update_user.php?")
+    Call<UserModel> updateProfile(
+            @Field("id") int id,
+            @Field("fullname") String fullname,
+            @Field("address") String address,
+            @Field("phone_number") String phone_number,
+            @Field("image_url") String image_url
+    );
+
+    @FormUrlEncoded
+    @POST("user/change_password.php?")
+    Call<UserModel> changePassword(
+            @Field("id") int id,
+            @Field("present_password") String present_password,
+            @Field("new_password") String new_password
+    );
 }
 
