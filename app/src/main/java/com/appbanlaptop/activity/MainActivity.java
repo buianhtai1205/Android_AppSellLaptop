@@ -65,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
         // auto hide menu Admin
         MenuItem itemAdmin = menu.findItem(R.id.menuAdmin);
         itemAdmin.setVisible(false);
+        // auto hide menu Shipper
+        MenuItem itemShipper = menu.findItem(R.id.menuShipper);
+        itemShipper.setVisible(false);
 
         SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
         int user_id = sharedPreferences.getInt("user_id", 0);
@@ -97,6 +100,11 @@ public class MainActivity extends AppCompatActivity {
             //check admin user
             if (Utils.isAdmin) {
                 itemAdmin.setVisible(true);
+            }
+
+            //check shipper user
+            if (Utils.isShipper) {
+                itemShipper.setVisible(true);
             }
         }
 

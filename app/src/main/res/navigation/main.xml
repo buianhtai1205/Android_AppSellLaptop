@@ -118,5 +118,10 @@
             android:id="@+id/action_changePasswordFragment_to_menuProfile"
             app:destination="@id/menuProfile" />
     </fragment>
+    <fragment
+        android:id="@+id/menuShipper"
+        android:name="com.appbanlaptop.fragment.shipper.ShipperFragment"
+        android:label="fragment_shipper"
+        tools:layout="@layout/fragment_shipper" />
 
 </navigation>

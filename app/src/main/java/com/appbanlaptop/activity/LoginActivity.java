@@ -68,6 +68,9 @@ public class LoginActivity extends AppCompatActivity {
                             if (role.equals("admin")) {
                                 Utils.isAdmin = true;
                             }
+                            if (role.equals("shipper")) {
+                                Utils.isShipper = true;
+                            }
 
                             // finish
                             Intent intent = new Intent();
