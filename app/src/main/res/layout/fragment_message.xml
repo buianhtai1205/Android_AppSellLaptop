@@ -5,11 +5,144 @@
     android:layout_height="match_parent"
     tools:context=".fragment.MessageFragment">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="20sp"
-        android:layout_gravity="center"
-        android:text="Message" />
+        android:layout_height="wrap_content" >
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/message_icon" />
+
+                <TextView
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Tin nhắn"
+                    android:layout_marginStart="20dp"
+                    android:textColor="#5a5672"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:background="@drawable/neumorphism"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="120dp" >
+                <ImageView
+                    android:layout_gravity="center"
+                    android:src="@drawable/user"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+                <TextView
+                    android:paddingEnd="60dp"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:text="Laptop Acer Nitro 5 đang giảm giá sốc, Mua ngay kẻo muộn."
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:backgroundTint="#18b7ec"
+                android:translationX="40dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/neumorphism"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="80dp" >
+                <TextView
+                    android:paddingEnd="50dp"
+                    android:paddingStart="30dp"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:text="Chào Admin, "
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:background="@drawable/neumorphism"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="120dp" >
+                <ImageView
+                    android:layout_gravity="center"
+                    android:src="@drawable/user"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+                <TextView
+                    android:paddingEnd="60dp"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:text="Laptop Acer Nitro 5 đang giảm giá sốc, Mua ngay kẻo muộn."
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:backgroundTint="#18b7ec"
+                android:translationX="40dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/neumorphism"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="120dp" >
+                <TextView
+                    android:paddingEnd="50dp"
+                    android:paddingStart="30dp"
+                    android:gravity="center"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:text="Laptop Acer Nitro 5 đang giảm giá sốc, Mua ngay kẻo muộn."
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="60dp" >
+                <EditText
+                    android:text="Nhập tin nhắn"
+                    android:background="@drawable/editext_background"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.8"
+                    android:layout_height="match_parent" />
+                <Button
+                    android:text="GỬI"
+                    android:background="@drawable/neumorphism"
+                    android:backgroundTint="#1bd57c"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.2"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            
+        </LinearLayout>
+    </ScrollView>
+
 
 </FrameLayout>
