@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:background="#fff"
+    android:layout_marginBottom="15dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageViewLaptop"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.15"
+                android:src="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/tvLaptopName"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.85"
+                android:text="Laptop Apple Macbook Air M2 2022"
+                android:textColor="#000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <TextView
+                android:id="@+id/tvLaptopCount"
+                android:paddingStart="10dp"
+                android:layout_width="0dp"
+                android:layout_weight="0.6"
+                android:layout_height="wrap_content"
+                android:text="Số lượng: 1"
+                android:textColor="#000" />
+            <TextView
+                android:id="@+id/tvLaptopSalePrice"
+                android:paddingStart="10dp"
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:layout_height="wrap_content"
+                android:text="29,990,999đ"
+                android:textColor="#f30c28" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <TextView
+                android:gravity="center"
+                android:text="Tình trạng đơn hàng: "
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/tvStatus"
+                android:textColor="#3408EF"
+                android:text="Đơn hàng đã giao cho đơn vị vận chuyển"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutReceiveOrder"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <TextView
+                android:text="Vui lòng chỉ nhấn Đã nhận được hàng khi đơn hàng đã được giao đến bạn và sản phẩm nhãn được không có vấn đề nào. "
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="match_parent" />
+            <Button
+                android:id="@+id/btnReceiveOrder"
+                android:background="@drawable/gradient_background"
+                android:text="Đã nhận hàng"
+                android:textColor="#fff"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/layoutFeedback"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <Button
+                android:id="@+id/btnReturnOrder"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:backgroundTint="#C3C5C8"
+                android:background="@drawable/login_btn_background"
+                android:text="Trả hàng hoàn tiền"
+                android:textColor="#000"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnFeedback"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:backgroundTint="#59FA02"
+                android:background="@drawable/login_btn_background"
+                android:text="Đánh giá sản phẩm"
+                android:textColor="#000"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,11 +5,28 @@
     android:layout_height="match_parent"
     tools:context=".fragment.OrderHistoryFragment">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="20sp"
-        android:layout_gravity="center"
-        android:text="Order History" />
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <TextView
+                android:text="Lịch sử mua hàng"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewOrderHistory"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
 
 </FrameLayout>

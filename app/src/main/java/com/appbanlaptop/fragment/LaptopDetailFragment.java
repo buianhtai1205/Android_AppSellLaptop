@@ -9,6 +9,8 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appbanlaptop.R;
+import com.appbanlaptop.adapter.FeedbackAdapter;
+import com.appbanlaptop.model.Feedback;
+import com.appbanlaptop.model.FeedbackModel;
 import com.appbanlaptop.model.Laptop;
 import com.appbanlaptop.model.LaptopModel;
 import com.appbanlaptop.retrofit.ApiShopLapTop;
@@ -89,6 +94,7 @@ public class LaptopDetailFragment extends Fragment {
     Button btnAddToCart, btnBuyNow;
     Integer laptopId, quantityOld = 0;;
     String laptopImageUrl;
+    RecyclerView recyclerViewFeedback;
 
     public static LaptopDetailFragment newInstance(String param1, String param2) {
         LaptopDetailFragment fragment = new LaptopDetailFragment();
@@ -125,6 +131,7 @@ public class LaptopDetailFragment extends Fragment {
 
         if (isConnected(getContext())) {
             getLaptopDetail(id);
+            getFeedbackLaptop(id);
 
             // handle add laptop to cart
             btnAddToCart.setOnClickListener(view -> {
@@ -137,6 +144,27 @@ public class LaptopDetailFragment extends Fragment {
 
 
         return layoutView;
+    }
+
+    private void getFeedbackLaptop(String laptopId) {
+        Call<FeedbackModel> call = apiShopLapTop.getFeedbacks(laptopId);
+        call.enqueue(new Callback<FeedbackModel>() {
+            @Override
+            public void onResponse(Call<FeedbackModel> call, Response<FeedbackModel> response) {
+                FeedbackModel feedbackModel = response.body();
+                if (feedbackModel.isSuccess()) {
+                    FeedbackAdapter feedbackAdapter = new FeedbackAdapter(feedbackModel.getResult());
+                    LinearLayoutManager linearLayoutManager =new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+                    recyclerViewFeedback.setLayoutManager(linearLayoutManager);
+                    recyclerViewFeedback.setAdapter(feedbackAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FeedbackModel> call, Throwable t) {
+                call.cancel();
+            }
+        });
     }
 
     private void addLaptopToCart() {
@@ -268,5 +296,7 @@ public class LaptopDetailFragment extends Fragment {
 
         btnAddToCart = layoutView.findViewById(R.id.btnAddToCart);
         btnBuyNow = layoutView.findViewById(R.id.btnBuyNow);
+
+        recyclerViewFeedback = layoutView.findViewById(R.id.recyclerViewFeedback);
     }
 }

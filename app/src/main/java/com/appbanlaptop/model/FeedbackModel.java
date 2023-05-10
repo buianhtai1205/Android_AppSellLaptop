@@ -2,13 +2,12 @@ package com.appbanlaptop.model;
 
 import java.util.List;
 
-public class OrderModel {
+public class FeedbackModel {
     private boolean success;
     private String message;
+    private List<Feedback> result;
 
-    private List<OrderHistory> result;
-
-    public OrderModel(boolean success, String message, List<OrderHistory> result) {
+    public FeedbackModel(boolean success, String message, List<Feedback> result) {
         this.success = success;
         this.message = message;
         this.result = result;
@@ -30,11 +29,11 @@ public class OrderModel {
         this.message = message;
     }
 
-    public List<OrderHistory> getResult() {
+    public List<Feedback> getResult() {
         return result;
     }
 
-    public void setResult(List<OrderHistory> result) {
+    public void setResult(List<Feedback> result) {
         this.result = result;
     }
 }

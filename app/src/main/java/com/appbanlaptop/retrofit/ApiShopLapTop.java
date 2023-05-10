@@ -4,6 +4,7 @@ package com.appbanlaptop.retrofit;
 import android.content.Intent;
 
 import com.appbanlaptop.model.BrandModel;
+import com.appbanlaptop.model.FeedbackModel;
 import com.appbanlaptop.model.LaptopModel;
 import com.appbanlaptop.model.Order;
 import com.appbanlaptop.model.OrderModel;
@@ -69,5 +70,26 @@ public interface ApiShopLapTop {
             @Field("present_password") String present_password,
             @Field("new_password") String new_password
     );
+
+    @GET("order/get_order.php?")
+    Call<OrderModel> getOrder(@Query("id") String id);
+
+    @FormUrlEncoded
+    @POST("order/update_order_received.php?")
+    Call<OrderModel> updateOderReceive(@Field("detail_id") String detail_id);
+
+    @FormUrlEncoded
+    @POST("order/feedback.php?")
+    Call<OrderModel> sendFeedback(
+            @Field("detail_id") String detail_id,
+            @Field("star") String star,
+            @Field("comment") String comment,
+            @Field("user_fullname") String user_fullname,
+            @Field("user_avatar") String user_avatar,
+            @Field("laptop_id") String laptop_id
+    );
+
+    @GET("order/get_feedback.php?")
+    Call<FeedbackModel> getFeedbacks(@Query("id") String id);
 }
 
